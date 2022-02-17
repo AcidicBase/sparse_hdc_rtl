@@ -1,8 +1,8 @@
 `include "FLOAT32_Comparator.v"
 
-module Quantizer(input_value, quantized_value_level, clk, en);
+module Quantizer(input_value, quantized_value_level, clk, en, nrst);
   input [31:0]input_value;
-  input clk, en;
+  input clk, en, nrst;
   output reg [3:0]quantized_value_level;
   wire [19:0]result;
   
@@ -71,27 +71,35 @@ module Quantizer(input_value, quantized_value_level, clk, en);
     .result(result[17:16])
   );
 
-  always@(posedge clk) begin
-    if (result[1:0] == 2'b10)
+  always@(posedge clk or negedge nrst) begin
+    if(!nrst)
       quantized_value_level = 4'b0000;
-    else if (result[3:2] == 2'b10)
-      quantized_value_level = 4'b0001;
-    else if (result[5:4] == 2'b10)
-      quantized_value_level = 4'b0010;
-    else if (result[7:6] == 2'b10)
-      quantized_value_level = 4'b0011;
-    else if (result[9:8] == 2'b10)
-      quantized_value_level = 4'b0100;
-    else if (result[11:10] == 2'b10)
-      quantized_value_level = 4'b0101;
-    else if (result[13:12] == 2'b10)
-      quantized_value_level = 4'b0110;
-    else if (result[15:14] == 2'b10)
-      quantized_value_level = 4'b0111;
-    else if (result[17:16] == 2'b10)
-      quantized_value_level = 4'b1000;
-    else
-      quantized_value_level = 4'b1001;
+    else begin
+      if(en) begin
+        if (result[1:0] == 2'b10)
+          quantized_value_level = 4'b0000;
+        else if (result[3:2] == 2'b10)
+          quantized_value_level = 4'b0001;
+        else if (result[5:4] == 2'b10)
+          quantized_value_level = 4'b0010;
+        else if (result[7:6] == 2'b10)
+          quantized_value_level = 4'b0011;
+        else if (result[9:8] == 2'b10)
+          quantized_value_level = 4'b0100;
+        else if (result[11:10] == 2'b10)
+          quantized_value_level = 4'b0101;
+        else if (result[13:12] == 2'b10)
+          quantized_value_level = 4'b0110;
+        else if (result[15:14] == 2'b10)
+          quantized_value_level = 4'b0111;
+        else if (result[17:16] == 2'b10)
+          quantized_value_level = 4'b1000;
+        else
+          quantized_value_level = 4'b1001;
+      end
+    end
+
   end
+
 endmodule
 
