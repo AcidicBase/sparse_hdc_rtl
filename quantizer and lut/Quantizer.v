@@ -1,8 +1,8 @@
 `include "FLOAT32_Comparator.v"
 
-module Quantizer(input_value, quantized_value_level, clk, en, nrst);
+module Quantizer(input_value, quantized_value_level, en, nrst);
   input [31:0]input_value;
-  input clk, en, nrst;
+  input en, nrst;
   output reg [3:0]quantized_value_level;
   wire [19:0]result;
   
@@ -71,7 +71,7 @@ module Quantizer(input_value, quantized_value_level, clk, en, nrst);
     .result(result[17:16])
   );
 
-  always@(posedge clk or negedge nrst) begin
+  always@(*) begin
     if(!nrst)
       quantized_value_level = 4'b0000;
     else begin
