@@ -1,6 +1,7 @@
 module tb_quantizer();
   reg [31:0]unquantized;
   reg en, nrst;
+//   reg [9:0]output_id;
   wire [3:0]quantized;
   
   
