@@ -1,5 +1,5 @@
-`include "Quantizer.v"
-`include "IM_Fetch.v"
+`include "Quantizer.sv"
+`include "IM_Fetch.sv"
 
 module Encoder(input_value, hv, clk, en, nrst);
   input [616:0][31:0]input_value;
@@ -9,7 +9,7 @@ module Encoder(input_value, hv, clk, en, nrst);
   wire [616:0][9:0]im_fetch_output;
   
   // Declare and initialize Item Memory
-  reg [9:0][9:0] im_hvs;    
+  reg [9:0] im_hvs [9:0];    
   
   generate
     genvar i;
@@ -27,7 +27,16 @@ module Encoder(input_value, hv, clk, en, nrst);
     genvar j;
     for (j=0; j<617; j=j+1) begin : ims
       IM_Fetch im(
-        .im_hvs(im_hvs),
+        .im1(im_hvs[0]),
+        .im2(im_hvs[1]),
+        .im3(im_hvs[2]),
+        .im4(im_hvs[3]),
+        .im5(im_hvs[4]),
+        .im6(im_hvs[5]),
+        .im7(im_hvs[6]),
+        .im8(im_hvs[7]),
+        .im9(im_hvs[8]),
+        .im10(im_hvs[9]),
         .qlevel(quantized_value_level[j][3:0]),
         .en(en),
         .nrst(nrst),
@@ -37,16 +46,7 @@ module Encoder(input_value, hv, clk, en, nrst);
   endgenerate
   
   initial begin
-    im_hvs[0][9:0] = 10'b0000000000;
-    im_hvs[1][9:0] = 10'b0000000001;
-    im_hvs[2][9:0] = 10'b0000000010;
-    im_hvs[3][9:0] = 10'b0000000011;
-    im_hvs[4][9:0] = 10'b0000000100;
-    im_hvs[5][9:0] = 10'b0000000101;
-    im_hvs[6][9:0] = 10'b0000000110;
-    im_hvs[7][9:0] = 10'b0000000111;
-    im_hvs[8][9:0] = 10'b0000001000;
-    im_hvs[9][9:0] = 10'b0000001001;
+    $readmemb("im.txt", im_hvs);
   end
   
   always@(posedge clk) begin

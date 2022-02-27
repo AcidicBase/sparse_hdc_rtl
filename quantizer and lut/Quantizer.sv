@@ -1,4 +1,4 @@
-`include "FLOAT32_Comparator.v"
+`include "FLOAT32_Comparator.sv"
 
 module Quantizer(input_value, quantized_value_level, en, nrst);
   input [31:0]input_value;
