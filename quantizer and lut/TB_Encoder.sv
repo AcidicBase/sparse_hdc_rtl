@@ -1,7 +1,7 @@
 module tb_encoder();
-  reg [616:0][31:0]input_value;
+  reg [10:0][31:0]input_value;
   reg clk, en, nrst;
-  wire [616:0][9:0]hv;
+  wire [10:0][4999:0]hv;
   
   Encoder UUT(
     .input_value(input_value),
