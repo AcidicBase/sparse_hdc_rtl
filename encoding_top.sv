@@ -51,6 +51,7 @@ module encoding_top(
                    .en(en),
                    .start_acc_thr(start_acc_thr),
                    .HV_bits_per_dim({
+                        shifted_hvs[0][j], shifted_hvs[1][j],shifted_hvs[2][j], shifted_hvs[3][j], shifted_hvs[4][j]
                         shifted_hvs[5][j], shifted_hvs[6][j],shifted_hvs[7][j], shifted_hvs[8][j], shifted_hvs[9][j],
                         shifted_hvs[10][j], shifted_hvs[11][j],shifted_hvs[12][j], shifted_hvs[13][j], shifted_hvs[14][j],
                         shifted_hvs[15][j], shifted_hvs[16][j],shifted_hvs[17][j], shifted_hvs[18][j], shifted_hvs[19][j],
