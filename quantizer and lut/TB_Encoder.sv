@@ -1,7 +1,7 @@
 module tb_encoder();
-  reg [10:0][31:0]input_value;
+  reg [3:0][31:0]input_value;
   reg clk, en, nrst;
-  wire [10:0][4999:0]hv;
+  wire [3:0][63:0]hv;
   
   Encoder UUT(
     .input_value(input_value),
@@ -26,7 +26,7 @@ initial begin
   #1
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
     
 // Scenario : 0.8889 > x > 0.66667
@@ -34,7 +34,7 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
     
 // Scenario : 0.66667 > x > 0.44444
@@ -42,7 +42,7 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
     
 // Scenario : 0.44444 > x > 0.22222
@@ -50,7 +50,7 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
   
 // Scenario : 0.22222 > x > 0
@@ -58,14 +58,14 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
     
 // Scenario : 0 > x > -0.22222
   input_value[0][31:0] = 32'b10111101110011001100110011001101; //-0.1
   #2
   clk = 1;
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   #2
   clk = 0;
     
@@ -74,7 +74,7 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
     
 // Scenario : -0.44444 > x > -0.66667
@@ -82,7 +82,7 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
     
 // Scenario : -0.66667 > x > -0.88889
@@ -90,7 +90,7 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
     
 // Scenario : x < -0.88889
@@ -98,7 +98,7 @@ initial begin
   #2
   clk = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk = 0;
 
 // // Scenario : nrst goes down
@@ -108,16 +108,16 @@ initial begin
   clk=1;
   nrst = 1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk=0;
     
 // Scenario : enable is 0 when nrst is 1
-  input_value = 32'b10111111100000000000000000000000; //-1.0
+  input_value[0][31:0] = 32'b10111111100000000000000000000000; //-1.0
   en = 0;
   #2
   clk=1;
   #2
-  $display("%b", hv[0][9:0]);
+  $display("%b", hv[0][31:0]);
   clk=0;
   #2
   clk = 1;

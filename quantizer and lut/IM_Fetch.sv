@@ -2,10 +2,10 @@ module IM_Fetch(
   im1, im2, im3, im4, im5, im6, im7, im8, im9, im10,
   qlevel, level_hv, en, nrst);
 
-  input [4999:0] im1, im2, im3, im4, im5, im6, im7, im8, im9, im10;
+  input [63:0] im1, im2, im3, im4, im5, im6, im7, im8, im9, im10;
   input [3:0]qlevel;
   input en, nrst;
-  output reg [4999:0] level_hv;
+  output reg [63:0] level_hv;
   
   always@(*) begin
     if (!nrst)
