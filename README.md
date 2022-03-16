@@ -13,7 +13,7 @@ adder hasn't been modified yet to not add when nb_reg > threshold value
 
 threshold value at the moment is 4
 
-confirmed to be working w/ behavioral simulation, not yet confirmed in post-synthesis. And not rigorously tested in behavioral. Should be sufficient to integrate into, though.
+confirmed to be working w/ behavioral simulation & post-synthesis functional, not yet confirmed in post-synthesis timing. Should be sufficient to integrate into, though.
 
 Has pipeline support. Previous submodule can change its output as long as 
 
