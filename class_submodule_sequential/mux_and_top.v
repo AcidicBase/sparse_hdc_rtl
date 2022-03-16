@@ -143,7 +143,7 @@ module mux_and_top(clk,nrst,input_class,input_hv,input_ready, hv_pipe, class_pip
             module_en <=1'd0;
         end
         else begin
-            if(state == 4'd0) begin
+            if(state == 4'd0 && input_ready) begin
                 module_en <= 1'd1;
             end
             else if (enable) begin
