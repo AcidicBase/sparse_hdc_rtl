@@ -5,7 +5,7 @@ module Encoder(input_value, hv, clk, en, nrst, S_ENC_START, S_QTZ);
   input [3:0][15:0]input_value;
   input clk, en, nrst;
   input S_QTZ;
-  output reg [3:0][63:0]hv;
+  output reg [9:0][63:0]hv;
   output reg S_ENC_START;
   wire [3:0][3:0]quantized_value_level;
   wire [3:0][63:0]im_fetch_output;
@@ -70,11 +70,81 @@ module Encoder(input_value, hv, clk, en, nrst, S_ENC_START, S_QTZ);
         hv = im_fetch_output;
 
         case(ctr)
-          10: begin
-            S_ENC_START = 1;
-            ctr = 0;
-          end
-          default: ctr = ctr + 1;
+          0: begin
+						hv[0] = im_fetch_output[0];
+						hv[1] = im_fetch_output[1];
+						hv[2] = im_fetch_output[2];
+						hv[3] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					1: begin
+						hv[4] = im_fetch_output[0];
+						hv[5] = im_fetch_output[1];
+						hv[6] = im_fetch_output[2];
+						hv[7] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					2: begin
+						hv[8] = im_fetch_output[0];
+						hv[9] = im_fetch_output[1];
+						hv[10] = im_fetch_output[2];
+						hv[11] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					3: begin
+						hv[12] = im_fetch_output[0];
+						hv[13] = im_fetch_output[1];
+						hv[14] = im_fetch_output[2];
+						hv[15] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					4: begin
+						hv[16] = im_fetch_output[0];
+						hv[17] = im_fetch_output[1];
+						hv[18] = im_fetch_output[2];
+						hv[19] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					5: begin
+						hv[20] = im_fetch_output[0];
+						hv[21] = im_fetch_output[1];
+						hv[22] = im_fetch_output[2];
+						hv[23] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					6: begin
+						hv[24] = im_fetch_output[0];
+						hv[25] = im_fetch_output[1];
+						hv[26] = im_fetch_output[2];
+						hv[27] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					7: begin
+						hv[28] = im_fetch_output[0];
+						hv[29] = im_fetch_output[1];
+						hv[30] = im_fetch_output[2];
+						hv[31] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					8: begin
+						hv[32] = im_fetch_output[0];
+						hv[33] = im_fetch_output[1];
+						hv[34] = im_fetch_output[2];
+						hv[35] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					9: begin
+						hv[36] = im_fetch_output[0];
+						hv[37] = im_fetch_output[1];
+						hv[38] = im_fetch_output[2];
+						hv[39] = im_fetch_output[3];
+						ctr = ctr + 1;
+					end
+					10: begin
+						S_ENC_START = 1;
+						ctr = 0;
+					end
+
         endcase
       end
   end
