@@ -46,14 +46,14 @@ module tb_top();
         input_hv <= 50'd255;
         input_class <= 5'd3;
         input_ready <= 1'd1;
-        #(300*`CLK_PERIOD);
-        //input_ready <= 1'd0;
-        //input_hv <= 50'd5;
-        //input_class <= 5'd5;
-        //#(`CLK_PERIOD);
-        //input_ready <= 1'd1;
-        //#(20*`CLK_PERIOD);
-        //input_ready <= 1'd0;
-        //#(20*`CLK_PERIOD);
+        #(35*`CLK_PERIOD);
+        input_ready <= 1'd0;
+        input_hv <= 50'd5;
+        input_class <= 5'd5;
+        #(`CLK_PERIOD);
+        input_ready <= 1'd1;
+        #(40*`CLK_PERIOD);
+        input_ready <= 1'd0;
+        #(20*`CLK_PERIOD);
      end
 endmodule
