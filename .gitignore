@@ -1,2 +1,5 @@
 quantizer and lut/python scripts/process_isolet/isolet_dataset
 quantizer and lut/python scripts/process_isolet/converted_samples
+quantizer and lut/python scripts/process_isolet/converted_samples_test
+quantizer and lut/python scripts/process_isolet/test_Y.mem
+quantizer and lut/python scripts/process_isolet/train_y.mem
