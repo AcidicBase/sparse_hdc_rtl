@@ -1,0 +1,11 @@
+// Level HVs
+`define LVL_HV_1  80'd0
+`define LVL_HV_2  80'd1
+`define LVL_HV_3  80'd2
+`define LVL_HV_4  80'd3
+`define LVL_HV_5  80'd4
+`define LVL_HV_6  80'd5
+`define LVL_HV_7  80'd6
+`define LVL_HV_8  80'd7
+`define LVL_HV_9  80'd8
+`define LVL_HV_10 80'd9
