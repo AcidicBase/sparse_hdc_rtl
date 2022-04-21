@@ -3,7 +3,6 @@ module class_fsm(
     input wire nrst,
     input wire en,
     input wire start_class_gen,
-    input wire training_hdc_model,
     input wire training_dataset_finished,       // assert (6,238*10) CCs after start_class_gen = 1
     output logic [3:0] nonbin_ctr,
     output logic [3:0] bin_ctr,
@@ -32,7 +31,7 @@ module class_fsm(
                         if(training_dataset_finished) begin
                             state <= S_BINARIZE;
                         end
-                        else if(training_hdc_model && start_class_gen) begin
+                        else if(start_class_gen) begin
                             state <= S_TRAIN_NONBIN;
                         end
                         else begin
@@ -71,7 +70,7 @@ module class_fsm(
         endcase
     end
      
-    // update nonbin_ctr (select-bit of all nonbinary class DEMUX) 
+    // update nonbin_ctr (select bit of all nonbinary class DEMUX) 
     always_ff @(posedge clk or negedge nrst) begin
         if (!nrst) begin
            nonbin_ctr <= 0;
@@ -89,7 +88,7 @@ module class_fsm(
         end    
     end  
     
-    // update bin_ctr (select-bit of all binary class DEMUX) 
+    // update bin_ctr (select bit of all binary class DEMUX) 
     always_ff @(posedge clk or negedge nrst) begin
         if (!nrst) begin
            bin_ctr <= 0;
@@ -107,7 +106,7 @@ module class_fsm(
         end    
     end  
     
-    // update class_hv_gen_ctr (select-bit of all nonbinary MUX)    
+    // update class_hv_gen_ctr (select bit of all nonbinary MUX)   
     always_ff @(posedge clk or negedge nrst) begin
         if (!nrst) begin
            class_hv_gen_ctr <= 0;
@@ -124,7 +123,7 @@ module class_fsm(
             class_hv_gen_ctr <= 0;
         end    
     end     
-    
+
     // update binarized_class_counter (counts from 0 to 25) 
     always_ff @(posedge clk or negedge nrst) begin
         if (!nrst) begin
@@ -132,7 +131,7 @@ module class_fsm(
         end      
         else if((state == S_BINARIZE) && en) begin
             if (bin_ctr == SEQ_CYCLE_COUNT-1) begin              // if ctr == 9, increment
-                binarized_class_counter = binarized_class_counter + 1;
+                binarized_class_counter <= binarized_class_counter + 1;
             end
             else begin 
                 binarized_class_counter <= binarized_class_counter;

@@ -41,10 +41,9 @@ module map_fsm(
      
      // output control signals (fully comb.)
      always_comb begin
-        case(state)
-            S_IDLE:  mapping_done = 0;          
-            S_MAP:   mapping_done = 0;
-            default: mapping_done = 1;      
+        case(state)         
+            S_MAP_DONE: mapping_done = 1;
+            default:    mapping_done = 0;      
         endcase
      end
      

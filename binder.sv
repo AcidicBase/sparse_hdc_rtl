@@ -13,7 +13,7 @@ module binder(
         if (!nrst) begin
             shifted_hv <= 0;
         end
-        else if ((start_binding == 1'b1) && en) begin
+        else if (start_binding && en) begin
             shifted_hv <= {level_hv[SHIFT-1:0], level_hv[HV_DIM-1:SHIFT]};
         end
         else begin

@@ -9,8 +9,8 @@ module class_hv_gen_top(
     input wire nrst,
     input wire en,
     input wire start_class_gen,
-    input wire training_hdc_model,
-    input wire training_dataset_finished,       // assert (6,238*10) CCs after start_class_gen = 1  
+	input wire training_hdc_model,
+    input wire training_dataset_finished,  
     input wire [HV_DIM-1:0] encoded_hv,
     input wire [4:0] class_select_bits,
     output wire [SEQ_CYCLE_COUNT-1:0][DIMS_PER_CC-1:0] bin_class_hvs [0:25],
@@ -31,6 +31,7 @@ module class_hv_gen_top(
     // nonbinary_class_reg internal signals
     wire [DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] nonbin_class_reg_out;
     wire [DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] nonbin_class_reg_in;
+	wire  [4:0] nonbin_class_select_bits;
     
     // binary_class_reg internal signals
     wire [DIMS_PER_CC-1:0] bin_class_reg_in;
@@ -42,7 +43,6 @@ module class_hv_gen_top(
         .nrst(nrst),
         .en(en),
         .start_class_gen(start_class_gen),
-        .training_hdc_model(training_hdc_model),
         .training_dataset_finished(training_dataset_finished),
         .nonbin_ctr(nonbin_ctr),
         .bin_ctr(bin_ctr),
@@ -62,7 +62,6 @@ module class_hv_gen_top(
     
     // instantiate class_thresholder
     class_thresholder C_THR_1(
-        .clk(clk),
         .nrst(nrst),
         .en(en),
         .binarizing_class_hvs(binarizing_class_hvs),
@@ -77,6 +76,7 @@ module class_hv_gen_top(
         .en(en),
         .adjusting_nonbin_class_hvs(adjusting_nonbin_class_hvs),
         .class_select_bits(class_select_bits),
+		.nonbin_class_select_bits(nonbin_class_select_bits),
         .nonbin_ctr(nonbin_ctr),
         .class_hv_gen_ctr(class_hv_gen_ctr),
         .nonbin_class_reg_in(nonbin_class_reg_in),
@@ -89,7 +89,7 @@ module class_hv_gen_top(
         .nrst(nrst),
         .en(en),
         .binarizing_class_hvs(binarizing_class_hvs),
-        .class_select_bits(binarized_class_counter),
+        .binarized_class_counter(binarized_class_counter),
         .bin_ctr(bin_ctr),
         .bin_class_reg_in(bin_class_reg_in),
         .bin_class_hvs(bin_class_hvs)
@@ -97,18 +97,30 @@ module class_hv_gen_top(
     
     // input mux
     always_comb begin
-        case(nonbin_ctr)
-            4'd0: input_hv_chunk = encoded_hv[7:0];                         // extend to 500 later
-            4'd1: input_hv_chunk = encoded_hv[15:8];
-            4'd2: input_hv_chunk = encoded_hv[23:16];
-            4'd3: input_hv_chunk = encoded_hv[31:24];
-            4'd4: input_hv_chunk = encoded_hv[39:32];
-            4'd5: input_hv_chunk = encoded_hv[47:40];
-            4'd6: input_hv_chunk = encoded_hv[55:48];
-            4'd7: input_hv_chunk = encoded_hv[63:56];
-            4'd8: input_hv_chunk = encoded_hv[71:64];
-            default: input_hv_chunk = encoded_hv[79:72];
-        endcase
-    end   
+		if (!nrst) begin
+			input_hv_chunk = 500'b0;
+		end
+		else if(training_hdc_model) begin
+		    case(nonbin_ctr)
+				4'd0:    input_hv_chunk = encoded_hv[499:0];
+		        4'd1:    input_hv_chunk = encoded_hv[999:500];
+		        4'd2:    input_hv_chunk = encoded_hv[1499:1000];
+		        4'd3:    input_hv_chunk = encoded_hv[1999:1500];
+		        4'd4:    input_hv_chunk = encoded_hv[2499:2000];
+		        4'd5:    input_hv_chunk = encoded_hv[2999:2500];
+		        4'd6:    input_hv_chunk = encoded_hv[3499:3000];
+		        4'd7:    input_hv_chunk = encoded_hv[3999:3500];
+		        4'd8:    input_hv_chunk = encoded_hv[4499:4000];
+		        default: input_hv_chunk = encoded_hv[4999:4500];
+		    endcase
+		end 
+		else begin
+			input_hv_chunk = input_hv_chunk;
+		end
+    end 
+
+	// select bits of nonbinary class mux
+	assign nonbin_class_select_bits = (binarizing_class_hvs == 1'b1) ? binarized_class_counter : class_select_bits;
+
     
 endmodule

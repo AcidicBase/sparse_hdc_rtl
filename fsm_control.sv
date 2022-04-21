@@ -74,3 +74,4 @@ module fsm_control(
     assign bundling_done = (ctr == SEQ_CYCLE_COUNT-1) ? 1'b1 : 1'b0;
     
 endmodule
+

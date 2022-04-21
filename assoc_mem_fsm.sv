@@ -3,7 +3,6 @@ module assoc_mem_fsm(
     input wire nrst,
     input wire en,
     input wire start_querying,
-    input wire testing_hdc_model,
     input wire testing_dataset_finished,
     output logic [3:0] query_ctr, 
     output logic comparing_query_hv_with_class_hv,
@@ -24,7 +23,7 @@ module assoc_mem_fsm(
         else begin
             case(state) 
                 S_IDLE:
-                    if(testing_hdc_model && start_querying && en) begin
+                    if(start_querying && en) begin
                         state <= S_QUERY;
                     end
                     else begin
@@ -69,7 +68,7 @@ module assoc_mem_fsm(
                 query_ctr <= query_ctr + 1;     // count from 0 to 9                                  
             end 
             else begin
-                query_ctr <= 0;                  // reset counter to 0
+                query_ctr <= 0;                 // reset counter to 0
             end
         end
         else begin

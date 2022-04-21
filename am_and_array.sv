@@ -1,5 +1,3 @@
-//`include "header.vh"            // remove when simulating
-
 module am_and_array( 
     input wire comparing_query_hv_with_class_hv,
     input wire [3:0] query_ctr,
@@ -7,7 +5,7 @@ module am_and_array(
     input wire [SEQ_CYCLE_COUNT-1:0][DIMS_PER_CC-1:0] binary_class_hvs [0:25],
     output logic [DIMS_PER_CC-1:0] and_array_out [0:25]     
     );
-    
+
     always_comb begin
         if (comparing_query_hv_with_class_hv) begin
             case(query_ctr)

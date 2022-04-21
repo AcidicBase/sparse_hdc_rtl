@@ -1,5 +1,3 @@
-//`include "header.vh"      // uncomment when synthesizing
-
 module im_fetch(
     input wire nrst,
     input wire en,
@@ -19,7 +17,7 @@ module im_fetch(
   
     always_comb begin
         if (!nrst)
-            level_hv = 0;
+            level_hv = 5000'b0;
         else begin
             if(en) begin
                 case(qlevel)
@@ -33,7 +31,7 @@ module im_fetch(
                     8 : level_hv = im8;
                     9 : level_hv = im9;
                    10 : level_hv = im10;
-                  default : level_hv = 0;
+                   default : level_hv = 5000'b0;
                 endcase
             end
             else begin

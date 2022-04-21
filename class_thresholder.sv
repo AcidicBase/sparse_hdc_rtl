@@ -1,5 +1,4 @@
 module class_thresholder(
-    input wire clk,
     input wire nrst,
     input wire en,
     input wire binarizing_class_hvs,    
@@ -7,7 +6,7 @@ module class_thresholder(
     output logic [DIMS_PER_CC-1:0] thresholded_hv
     );
     
-    always_ff @(posedge clk or negedge nrst) begin
+    always_comb begin
         if (!nrst) begin
             for(int i = 0; i < DIMS_PER_CC; i++) begin
                 thresholded_hv[i] = 1'b0;
@@ -26,4 +25,3 @@ module class_thresholder(
     end
  
 endmodule
-

@@ -4,6 +4,7 @@ module nonbinary_class_reg(
     input wire en,
     input wire adjusting_nonbin_class_hvs,
     input wire [4:0] class_select_bits,
+	input wire [4:0] nonbin_class_select_bits,
     input wire [3:0] nonbin_ctr,    
     input wire [3:0] class_hv_gen_ctr,
     input wire [DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] nonbin_class_reg_in,
@@ -11,7 +12,7 @@ module nonbinary_class_reg(
     );  
       
     // we have 26 registers, each having 5000 dimensions. Each dimension is 9 bits long.
-    // equal to "logic [9:0][499:0][8:0] nonbin_class_hvs [0:26]"
+    // equal to "logic [9:0][499:0][8:0] nonbin_class_hvs [0:25]"
     logic [SEQ_CYCLE_COUNT-1:0][DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] nonbin_class_hvs [0:25];
   
     // class hvs & input nonbinary class demux
@@ -21,7 +22,7 @@ module nonbinary_class_reg(
                 nonbin_class_hvs[i] = 0;
             end
         end    
-        else if ((adjusting_nonbin_class_hvs == 1'b1) && en) begin
+        else if (adjusting_nonbin_class_hvs && en) begin
             case(class_select_bits)
                 5'd0: begin
                     case(nonbin_ctr)
@@ -390,13 +391,13 @@ module nonbinary_class_reg(
             endcase
         end 
         else begin
-            nonbin_class_hvs = nonbin_class_hvs;
+            nonbin_class_hvs <= nonbin_class_hvs;
         end
     end 
   
     // output nonbinary class mux
     always_comb begin
-        case(class_select_bits) 
+        case(nonbin_class_select_bits) 
             5'd0: begin
                 case(class_hv_gen_ctr)
                     5'd0: nonbin_class_reg_out = nonbin_class_hvs[0][0];
@@ -763,6 +764,6 @@ module nonbinary_class_reg(
             end         
         endcase       
     end   
-    
+ 
 endmodule
 

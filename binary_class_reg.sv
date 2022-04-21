@@ -3,12 +3,13 @@ module binary_class_reg(
     input wire nrst,
     input wire en,
     input wire binarizing_class_hvs,
-    input wire [4:0] class_select_bits,
+    input wire [4:0] binarized_class_counter,
     input wire [3:0] bin_ctr,    
     input wire [DIMS_PER_CC-1:0] bin_class_reg_in,    
     output logic [SEQ_CYCLE_COUNT-1:0][DIMS_PER_CC-1:0] bin_class_hvs [0:25]
-    );      
-    // Note: output is equal to "logic [9:0][499:0] bin_class_hvs [0:26]" 
+    );    
+  
+    // Note: output is equal to "logic [9:0][499:0] bin_class_hvs [0:25]" 
          
     // binary class hvs & input nonbinary class demux
     always_ff @(posedge clk or negedge nrst) begin
@@ -17,8 +18,8 @@ module binary_class_reg(
                 bin_class_hvs[i] = 0;
             end
         end    
-        else if ((binarizing_class_hvs == 1'b1) && en) begin
-            case(class_select_bits)
+        else if (binarizing_class_hvs && en) begin
+            case(binarized_class_counter)
                 5'd0: begin
                     case(bin_ctr)
                         5'd0: bin_class_hvs[0][0] <= bin_class_reg_in;
@@ -386,7 +387,7 @@ module binary_class_reg(
             endcase
         end 
         else begin
-            bin_class_hvs = bin_class_hvs;
+            bin_class_hvs <= bin_class_hvs;
         end
     end 
   

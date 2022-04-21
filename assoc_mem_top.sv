@@ -37,7 +37,6 @@ module assoc_mem_top(
         .nrst(nrst),
         .en(en),
         .start_querying(start_querying),
-        .testing_hdc_model(testing_hdc_model),
         .testing_dataset_finished(testing_dataset_finished),
         .query_ctr(query_ctr),
         .comparing_query_hv_with_class_hv(comparing_query_hv_with_class_hv),
@@ -87,18 +86,26 @@ module assoc_mem_top(
     
     // input mux
     always_comb begin
-        case(query_ctr)
-            4'd0: query_hv_segment = query_hv[7:0];                         // extend to 500 later
-            4'd1: query_hv_segment = query_hv[15:8];
-            4'd2: query_hv_segment = query_hv[23:16];
-            4'd3: query_hv_segment = query_hv[31:24];
-            4'd4: query_hv_segment = query_hv[39:32];
-            4'd5: query_hv_segment = query_hv[47:40];
-            4'd6: query_hv_segment = query_hv[55:48];
-            4'd7: query_hv_segment = query_hv[63:56];
-            4'd8: query_hv_segment = query_hv[71:64];
-            default: query_hv_segment = query_hv[79:72];
-        endcase
+		if(!nrst) begin
+			query_hv_segment = 500'b0;
+		end 
+		else if (testing_hdc_model) begin
+		    case(query_ctr)
+				4'd0:    query_hv_segment = query_hv[499:0];
+		        4'd1:    query_hv_segment = query_hv[999:500];
+		        4'd2:    query_hv_segment = query_hv[1499:1000];
+		        4'd3:    query_hv_segment = query_hv[1999:1500];
+		        4'd4:    query_hv_segment = query_hv[2499:2000];
+		        4'd5:    query_hv_segment = query_hv[2999:2500];
+		        4'd6:    query_hv_segment = query_hv[3499:3000];
+		        4'd7:    query_hv_segment = query_hv[3999:3500];
+		        4'd8:    query_hv_segment = query_hv[4499:4000];
+		        default: query_hv_segment = query_hv[4999:4500];
+		    endcase
+		end 
+		else begin
+			query_hv_segment = query_hv_segment;
+		end
     end  
 
 endmodule

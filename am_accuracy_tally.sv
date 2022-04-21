@@ -6,13 +6,19 @@ module am_accuracy_tally(
     input wire [4:0] class_inference,
     output logic [10:0] number_of_correct_inferences   
     );
+
+	wire correct_inference;
+
+	assign correct_inference = (class_inference == correct_class) ? 1'b1 : 1'b0;
     
     always_ff @(posedge clk or negedge nrst) begin
         if (!nrst) begin
             number_of_correct_inferences = 0;
         end
         else if(tallying_accuracy) begin
-            number_of_correct_inferences = number_of_correct_inferences + (correct_class == class_inference);
+            number_of_correct_inferences = number_of_correct_inferences + correct_inference;
+			$display("@%g  correct class = %d, class inference = %d;", $time, correct_class, class_inference);	// rmv later
+			$display("_________________________________________________________________________");
         end
         else begin
             number_of_correct_inferences = number_of_correct_inferences;
