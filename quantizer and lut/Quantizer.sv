@@ -7,10 +7,10 @@ module Quantizer(input_value, quantized_value_level, en, nrst);
     if(!nrst) begin
       quantized_value_level = 0;
     end else begin
-      if( $signed(input_value[15:0]) > 8889)
+      if( $signed(input_value[15:0]) > 8888)
         quantized_value_level = 1;
       else begin
-        if ( $signed(input_value) > 6667)
+        if ( $signed(input_value) > 6666)
           quantized_value_level = 2;
         else begin
           if ($signed(input_value) > 4444)
@@ -22,10 +22,10 @@ module Quantizer(input_value, quantized_value_level, en, nrst);
               if($signed(input_value) > 0)
                 quantized_value_level = 5;
               else begin
-                if($signed(input_value) > -2222)
+                if($signed(input_value) > -2223)
                   quantized_value_level = 6;
                 else begin
-                  if($signed(input_value) > -4444)
+                  if($signed(input_value) > -4445)
                     quantized_value_level = 7;
                   else begin
                     if($signed(input_value) > -6667)

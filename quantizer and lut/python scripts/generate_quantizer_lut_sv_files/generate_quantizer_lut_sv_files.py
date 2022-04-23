@@ -180,7 +180,7 @@ endmodule
     ds_input_max_index,
     parallel_count,
     hv_max_index,
-    generate_sample_hv_assignment(hv_width),
+    generate_hv_assignment(),
     generate_output_assignment_cases(parallel_count, sample_period)
   ))
 
