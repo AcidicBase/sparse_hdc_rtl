@@ -27,6 +27,7 @@ module class_hv_gen_top(
     
     // Bundler internal signals
     logic [DIMS_PER_CC-1:0] input_hv_chunk;
+	wire  [DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] stored_hv_chunk;
     
     // nonbinary_class_reg internal signals
     wire [DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] nonbin_class_reg_out;
@@ -56,9 +57,11 @@ module class_hv_gen_top(
     // instantiate class_bundler
     class_bundler C_BUNDLE_1(
         .input_hv_chunk(input_hv_chunk),
-        .stored_hv_chunk(nonbin_class_reg_out),
+        .stored_hv_chunk(stored_hv_chunk),
         .sum(nonbin_class_reg_in)
     );
+
+	assign stored_hv_chunk = (training_hdc_model) ? nonbin_class_reg_out : 4500'b0;	
     
     // instantiate class_thresholder
     class_thresholder C_THR_1(

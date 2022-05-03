@@ -7,17 +7,17 @@ module binder(
     output logic [HV_DIM-1:0] shifted_hv
 );
 
-    parameter SHIFT = 1;            // default shift value; this is changed when instantiated
+    parameter SHIFT = 1;            // default shift value; this is the signature during binding
 
     always_ff @(posedge clk or negedge nrst) begin
         if (!nrst) begin
-            shifted_hv <= 0;
+            shifted_hv = 0;
         end
         else if (start_binding && en) begin
-            shifted_hv <= {level_hv[SHIFT-1:0], level_hv[HV_DIM-1:SHIFT]};
+            shifted_hv = {level_hv[SHIFT-1:0], level_hv[HV_DIM-1:SHIFT]};
         end
         else begin
-            shifted_hv <= shifted_hv;
+            shifted_hv = shifted_hv;
         end
     end
 

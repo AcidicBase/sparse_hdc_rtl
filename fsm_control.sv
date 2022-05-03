@@ -3,8 +3,8 @@ module fsm_control(
     input wire nrst,
     input wire en,
     input wire start_encoding,
-    output logic start_binding,
     output logic [3:0] ctr,
+	output logic bundling_features,
     output logic encoding_done
     );
        
@@ -26,8 +26,8 @@ module fsm_control(
                     end
                     else begin
                         state <= S_IDLE;
-                    end
-                S_BIND:   state <= S_BUNDLE;   
+                    end 
+				S_BIND:   state <= S_BUNDLE;  
                 S_BUNDLE: 
                     if(bundling_done) begin         
                         state <= S_ENC_DONE;
@@ -36,7 +36,7 @@ module fsm_control(
                         state <= S_BUNDLE;
                     end            
                 default:
-                    if(start_encoding && en) begin
+					if(start_encoding && en) begin
                         state <= S_BIND;
                     end
                     else begin
@@ -48,10 +48,10 @@ module fsm_control(
      
      // output control signals (fully comb.)
      always_comb begin
-        case(state)        
-            S_BIND:     {start_binding, encoding_done} = {1'b1, 1'b0};
-            S_ENC_DONE: {start_binding, encoding_done} = {1'b0, 1'b1}; 
-            default:    {start_binding, encoding_done} = {1'b0, 1'b0};  
+        case(state) 
+			S_BUNDLE:   {bundling_features, encoding_done} = {1'b1, 1'b0};     
+            S_ENC_DONE: {bundling_features, encoding_done} = {1'b0, 1'b1};
+            default:    {bundling_features, encoding_done} = {1'b0, 1'b0};
         endcase
      end
      

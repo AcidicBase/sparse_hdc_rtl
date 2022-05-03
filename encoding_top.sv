@@ -13,15 +13,16 @@ module encoding_top(
     output logic [HV_DIM-1:0] encoded_hv
     );
     
-	wire start_binding;
+	wire bundling_features;
     wire [3:0] ctr;
     wire [HV_DIM-1:0] shifted_hvs [0:FEATURE_COUNT-1];
-    logic [FEATURE_COUNT-1:0] bits_to_bundle_arr [0:HV_DIM-1];
+    logic [FEATURE_COUNT-1:0] bits_to_bundle_arr [HV_DIM-1:0];
 	logic [HV_DIM-1:0] partial_encoded_hv;
     
     // for mux & demux 
-    logic [FEATURE_COUNT-1:0] mux_out [0:DIMS_PER_CC-1];
-    wire [DIMS_PER_CC-1:0] thresholded_bits ;
+    logic [FEATURE_COUNT-1:0] mux_out [DIMS_PER_CC-1:0];
+    wire [DIMS_PER_CC-1:0] thresholded_bits;
+	
     
     //instantiate FSM
     fsm_control FSM_CONTROL_0(
@@ -29,8 +30,8 @@ module encoding_top(
         .nrst(nrst),
         .en(en),
         .start_encoding(start_encoding),
-		.start_binding(start_binding),
         .ctr(ctr),
+		.bundling_features(bundling_features),
         .encoding_done(encoding_done)
     );  
          
@@ -41,33 +42,35 @@ module encoding_top(
             .clk(clk),
             .nrst(nrst),
             .en(en),
-            .start_binding(start_binding),
+            .start_binding(start_encoding),
             .level_hv(level_hvs[i]),
             .shifted_hv(shifted_hvs[i])
         );
     end            
-                     
+               
     // instantiate DIMS_PER_CC=500 bundlers   
     for (genvar j = 0; j < DIMS_PER_CC; j++) begin : bundlers
        bundler DUT_BUNDLER(
+		   .nrst(nrst),
+		   .bundling_features(bundling_features),
            .bits_to_bundle(mux_out[j]), 
-           .thresholded_bit(thresholded_bits[j])
+           .thresholded_bit(thresholded_bits[(DIMS_PER_CC-1)-j]) // thresholded_bits[j]
         ); 
     end
  
     // input mux for bundlers
     always_comb begin
         case(ctr)
-			4'd0:    mux_out = bits_to_bundle_arr[0:499];
-            4'd1:    mux_out = bits_to_bundle_arr[500:999];
-            4'd2:    mux_out = bits_to_bundle_arr[1000:1499];
-            4'd3:    mux_out = bits_to_bundle_arr[1500:1999];
-            4'd4:    mux_out = bits_to_bundle_arr[2000:2499];
-            4'd5:    mux_out = bits_to_bundle_arr[2500:2999];
-            4'd6:    mux_out = bits_to_bundle_arr[3000:3499];
-            4'd7:    mux_out = bits_to_bundle_arr[3500:3999];
-            4'd8:    mux_out = bits_to_bundle_arr[4000:4499];
-            4'd9:    mux_out = bits_to_bundle_arr[4500:4999];
+			4'd0:    mux_out = bits_to_bundle_arr[499:0];
+            4'd1:    mux_out = bits_to_bundle_arr[999:500];
+            4'd2:    mux_out = bits_to_bundle_arr[1499:1000];
+            4'd3:    mux_out = bits_to_bundle_arr[1999:1500];
+            4'd4:    mux_out = bits_to_bundle_arr[2499:2000];
+            4'd5:    mux_out = bits_to_bundle_arr[2999:2500];
+            4'd6:    mux_out = bits_to_bundle_arr[3499:3000];
+            4'd7:    mux_out = bits_to_bundle_arr[3999:3500];
+            4'd8:    mux_out = bits_to_bundle_arr[4499:4000];
+            4'd9:    mux_out = bits_to_bundle_arr[4999:4500];
 			default: mux_out = mux_out;
         endcase
     end 
@@ -78,18 +81,18 @@ module encoding_top(
         if (!nrst) begin
             partial_encoded_hv <= 5000'b0;
         end    
-        else if (en) begin			
+        else if (bundling_features && en) begin			
             case(ctr) 
-                4'd0:    partial_encoded_hv[499:0]     <= thresholded_bits;
-                4'd1:    partial_encoded_hv[999:500]   <= thresholded_bits;
-                4'd2:    partial_encoded_hv[1499:1000] <= thresholded_bits;
-                4'd3:    partial_encoded_hv[1999:1500] <= thresholded_bits;
-                4'd4:    partial_encoded_hv[2499:2000] <= thresholded_bits;
-                4'd5:    partial_encoded_hv[2999:2500] <= thresholded_bits;
-                4'd6:    partial_encoded_hv[3499:3000] <= thresholded_bits;
-                4'd7:    partial_encoded_hv[3999:3500] <= thresholded_bits;
-                4'd8:    partial_encoded_hv[4499:4000] <= thresholded_bits;
-                4'd9:    partial_encoded_hv[4999:4500] <= thresholded_bits;
+                4'd0:    partial_encoded_hv[4999:4500] <= thresholded_bits;
+                4'd1:    partial_encoded_hv[4499:4000] <= thresholded_bits;
+                4'd2:    partial_encoded_hv[3999:3500] <= thresholded_bits;
+                4'd3:    partial_encoded_hv[3499:3000] <= thresholded_bits;
+                4'd4:    partial_encoded_hv[2999:2500] <= thresholded_bits;
+                4'd5:    partial_encoded_hv[2499:2000] <= thresholded_bits;
+                4'd6:    partial_encoded_hv[1999:1500] <= thresholded_bits;
+                4'd7:    partial_encoded_hv[1499:1000] <= thresholded_bits;
+                4'd8:    partial_encoded_hv[999:500]   <= thresholded_bits;
+                4'd9:    partial_encoded_hv[499:0]     <= thresholded_bits;
                 default: partial_encoded_hv <= partial_encoded_hv;    
             endcase
         end 
@@ -103,7 +106,8 @@ module encoding_top(
         if (!nrst) begin
             encoded_hv <= 5000'b0;
         end    
-        else if (encoding_done && en) begin			
+        else if (encoding_done && en) begin		
+			//$display("@%g encoded_hv = %h \n", $time, encoded_hv);
 			encoded_hv <= partial_encoded_hv;
         end 
         else begin
@@ -244,4 +248,4 @@ module encoding_top(
         end
     end
               
- endmodule
+endmodule

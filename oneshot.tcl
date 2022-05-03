@@ -1,0 +1,66 @@
+
+# XM-Sim Command File
+# TOOL:	xmsim(64)	20.09-s012
+#
+#
+# You can restore this configuration with:
+#
+#      xrun -64bit -access +r tb_oneshot_hdc_top.sv -input /home/jcaguicla/Documents/oneshot_apr16/oneshot.tcl
+#
+
+set tcl_prompt1 {puts -nonewline "xcelium> "}
+set tcl_prompt2 {puts -nonewline "> "}
+set vlog_format %h
+set vhdl_format %v
+set real_precision 6
+set display_unit auto
+set time_unit module
+set heap_garbage_size -200
+set heap_garbage_time 0
+set assert_report_level note
+set assert_stop_level error
+set autoscope yes
+set assert_1164_warnings yes
+set pack_assert_off {}
+set severity_pack_assert_off {note warning}
+set assert_output_stop_level failed
+set tcl_debug_level 0
+set relax_path_name 1
+set vhdl_vcdmap XX01ZX01X
+set intovf_severity_level ERROR
+set probe_screen_format 0
+set rangecnst_severity_level ERROR
+set textio_severity_level ERROR
+set vital_timing_checks_on 1
+set vlog_code_show_force 0
+set assert_count_attempts 1
+set tcl_all64 false
+set tcl_runerror_exit false
+set assert_report_incompletes 0
+set show_force 1
+set force_reset_by_reinvoke 0
+set tcl_relaxed_literal 0
+set probe_exclude_patterns {}
+set probe_packed_limit 4k
+set probe_unpacked_limit 16k
+set assert_internal_msg no
+set svseed 1
+set assert_reporting_mode 0
+set vcd_compact_mode 0
+alias . run
+alias quit exit
+database -open -shm -into waves.shm waves -default
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.clk tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.start_mapping tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.state tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.input_values tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.training_hdc_model tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.training_dataset_finished tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.testing_hdc_model tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.testing_dataset_finished tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.oneshot_hdc_done tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.clk tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.start_mapping tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.state tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.ctr tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.mapping_hv_segment tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.mapping_done tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.clk tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.start_encoding tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.state tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.bundling_done tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.ctr tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.shifted_hvs tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[9].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[8].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[7].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[6].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[5].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[4].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[3].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[2].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[1].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[0].DUT_BUNDLER.accumulated_sum tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.encoding_done tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.clk tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.start_class_gen tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.adjusting_nonbin_class_hvs tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.nonbin_ctr tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_hv_gen_ctr tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.bin_ctr tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.input_hv_chunk tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_in tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_out tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.binarizing_class_hvs tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.binarized_class_counter tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.NONBIN_CLASS_1.class_select_bits tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.bin_class_reg_in tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.binarizing_done tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.bin_class_hvs tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_gen_done tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.clk tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.comparing_query_hv_with_class_hv tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.query_ctr tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.tallying_accuracy tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.testing_dataset_finished tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.query_hv tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.binary_class_hvs tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.query_ctr tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.and_array_out tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.similarity_values tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.start_querying tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.correct_class tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.inferring_class tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.class_inference tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.number_of_correct_inferences
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.level_hvs
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.partial_encoded_hv
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.encoded_hv
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_in
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_out
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.NONBIN_CLASS_1.nonbin_class_hvs
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.bin_class_hvs
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.query_hv
+probe -create -database waves tb_oneshot_hdc_top.nrst tb_oneshot_hdc_top.en tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.class_gen_done
+probe -create -database waves tb_oneshot_hdc_top.ONE_SHOT_TOP.class_select_bits tb_oneshot_hdc_top.ONE_SHOT_TOP.start_mapping tb_oneshot_hdc_top.ONE_SHOT_TOP.level_hvs tb_oneshot_hdc_top.ONE_SHOT_TOP.mapping_done tb_oneshot_hdc_top.ONE_SHOT_TOP.encoded_hv tb_oneshot_hdc_top.ONE_SHOT_TOP.encoding_done tb_oneshot_hdc_top.ONE_SHOT_TOP.bin_class_hvs tb_oneshot_hdc_top.ONE_SHOT_TOP.class_gen_done tb_oneshot_hdc_top.ONE_SHOT_TOP.class_inference tb_oneshot_hdc_top.ONE_SHOT_TOP.number_of_correct_inferences tb_oneshot_hdc_top.ONE_SHOT_TOP.oneshot_hdc_done tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.mapping_hv_segment tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.hv_fetch_done tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.mux_out tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.quantized_value_levels tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.im_fetch_outputs
+probe -create -database waves
+
+simvision -input oneshot.tcl.svcf

@@ -20,9 +20,10 @@ module tb_oneshot_hdc_top();
     logic [4:0] class_select_bits_train [0:TRAINING_DATAPOINTS_COUNT-1];
     logic [4:0] class_select_bits_test  [0:TESTING_DATAPOINTS_COUNT-1];
     
-	logic [10:0] accuracy_checker;
     string training_sample;
     string testing_sample;
+
+	integer fd; // rmv later
 
     oneshot_hdc_top ONE_SHOT_TOP(
         .clk(clk),
@@ -52,12 +53,14 @@ module tb_oneshot_hdc_top();
         class_select_bits = 0;
         training_dataset_finished = 0; 
         testing_dataset_finished = 0; 
-		accuracy_checker = 0;
         
         for(int i = 0; i < FEATURE_COUNT; i++) begin
             input_values[i] = 0;
         end
     
+		// write inferences to a text file
+		fd = $fopen("oneshot_inferences.txt.", "w");
+
         // store the letters of the isolet dataset
         $readmemb("train_Y.mem", class_select_bits_train);
         $readmemb("test_Y.mem", class_select_bits_test);
@@ -68,7 +71,6 @@ module tb_oneshot_hdc_top();
         en = 1'b1;       
         #`CLK_PERIOD
 
- 
 		// TRAINING CLASS HVS   
  		$readmemb("converted_samples/sample_0.mem", input_values);
 
@@ -135,38 +137,48 @@ module tb_oneshot_hdc_top();
 
 		$display("@%g Start testing ...", $time);
 
-		for(int i = 0; i < TESTING_DATAPOINTS_COUNT-2; i++) begin       
-            class_select_bits = class_select_bits_test[i]; 
-            
-			#(`CLK_PERIOD*2);
+		for(int i = 0; i < TESTING_DATAPOINTS_COUNT-2; i++) begin                   		
 
+			#(`CLK_PERIOD*2);
+			class_select_bits = class_select_bits_test[i]; 
             $sformat(testing_sample,"converted_samples_test/test_sample_%0d.mem",i+2);           
-            $readmemb(testing_sample, input_values);
-            
+            $readmemb(testing_sample, input_values);           
             start_mapping = 1'b1;
+
             #`CLK_PERIOD
             start_mapping = 1'b0;
-            #(`CLK_PERIOD*9);   
+            #(`CLK_PERIOD*9);  
+
+			$fwrite(fd, class_inference); // kanina nasa pinakataas; iadjust yung nasa baba acordingly.
+			$fwrite(fd, "\n");
+ 
         end 
-		#(`CLK_PERIOD*2);
 
 		// overhead class_select_bits assertion before testing ends
+		#(`CLK_PERIOD*2);
+		$fwrite(fd, class_inference);
+		$fwrite(fd, "\n");
 		class_select_bits = class_select_bits_test[TESTING_DATAPOINTS_COUNT-2];
 		#(`CLK_PERIOD*12);
+		$fwrite(fd, class_inference);
+		$fwrite(fd, "\n");
 		class_select_bits = class_select_bits_test[TESTING_DATAPOINTS_COUNT-1];
-		#(`CLK_PERIOD*11);
+		#(`CLK_PERIOD*12);
+		$fwrite(fd, class_inference);
+		$fwrite(fd, "\n");
 
       
         // TESTING FINISHED
-        //#(`CLK_PERIOD*23);
+        //#(`CLK_PERIOD*12); // hmm
         testing_dataset_finished = 1'b1;
         #`CLK_PERIOD testing_dataset_finished = 1'b0;
 		$display("----------------------------------------------");
 		$display("@%g Number of correct inferences: \t %d", $time, number_of_correct_inferences);
 		$display("Total number of queries made: \t %d \n", TESTING_DATAPOINTS_COUNT);
-		$display("Accuracy: \t\t\t\t %f%", (number_of_correct_inferences/TESTING_DATAPOINTS_COUNT)*100.0);
+		$display("Accuracy: \t\t\t\t %f%", (number_of_correct_inferences/15.59));
 		
-     
+     	$fclose(fd);	// lolz will it work?
+
         #(`CLK_PERIOD*5)
         $finish;
 

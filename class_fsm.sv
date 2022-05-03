@@ -113,10 +113,10 @@ module class_fsm(
         end      
         else if(((state == S_TRAIN_NONBIN) || (state == S_BINARIZE)) && en) begin 
             if (class_hv_gen_ctr < SEQ_CYCLE_COUNT-1) begin
-                class_hv_gen_ctr <= class_hv_gen_ctr + 1;     // count from 0 to 9                                  
+                class_hv_gen_ctr <= class_hv_gen_ctr + 1;    // count from 0 to 9                                  
             end 
             else begin
-                class_hv_gen_ctr <= 0;               // reset counter to 0
+                class_hv_gen_ctr <= 0;                      // reset counter to 0
             end
         end
         else begin

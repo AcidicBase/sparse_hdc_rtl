@@ -1,24 +1,38 @@
 module bundler(
+	input wire nrst,
+	input wire bundling_features,
     input wire [FEATURE_COUNT-1:0] bits_to_bundle,
     output wire thresholded_bit
     );
-       
+
     // Binary Tree Adder  
-    wire [1:0] tree_add_lvl_0[0:307];
-    wire [2:0] tree_add_lvl_1[0:153];
-    wire [3:0] tree_add_lvl_2[0:76];
-    wire [4:0] tree_add_lvl_3[0:38];
-    wire [5:0] tree_add_lvl_4[0:18];
-    wire [6:0] tree_add_lvl_5[0:9];
-    wire [7:0] tree_add_lvl_6[0:4];
-    wire [8:0] tree_add_lvl_7[0:1];
-    wire [9:0] tree_add_lvl_8;
-    wire [9:0] accumulated_sum;
+    logic [1:0] tree_add_lvl_0[0:307];
+    wire  [2:0] tree_add_lvl_1[0:153];
+    wire  [3:0] tree_add_lvl_2[0:76];
+    wire  [4:0] tree_add_lvl_3[0:38];
+    wire  [5:0] tree_add_lvl_4[0:18];
+    wire  [6:0] tree_add_lvl_5[0:9];
+    wire  [7:0] tree_add_lvl_6[0:4];
+    wire  [8:0] tree_add_lvl_7[0:1];
+    wire  [9:0] tree_add_lvl_8;
+    wire  [9:0] accumulated_sum;
   
     // Tree adder level 0
-    for (genvar i = 0; i < 308; i++ ) begin
-      assign tree_add_lvl_0[i] = bits_to_bundle[2*i] + bits_to_bundle[(2*i)+1];
-    end
+	always_comb begin
+		if(!nrst) begin
+			for (int i = 0; i < 308; i++ ) begin
+			  tree_add_lvl_0[i] = 0;
+			end
+		end
+		else if(bundling_features) begin
+			for (int i = 0; i < 308; i++ ) begin
+			  tree_add_lvl_0[i] = bits_to_bundle[2*i] + bits_to_bundle[(2*i)+1];
+			end
+		end 
+		else begin
+			tree_add_lvl_0 = tree_add_lvl_0;
+		end
+	end
       
     // Tree adder level 1
     for (genvar i = 0; i < 154; i++ ) begin
@@ -64,7 +78,7 @@ module bundler(
 
     // Accumulated sum
     assign accumulated_sum = tree_add_lvl_8 + tree_add_lvl_6[4]; 
-       
+      
     // update thresholded_bit  
     assign thresholded_bit = (accumulated_sum > ENCODING_BIT_THR-1) ? 1'b1 : 1'b0;
   

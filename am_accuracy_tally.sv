@@ -17,8 +17,7 @@ module am_accuracy_tally(
         end
         else if(tallying_accuracy) begin
             number_of_correct_inferences = number_of_correct_inferences + correct_inference;
-			$display("@%g  correct class = %d, class inference = %d;", $time, correct_class, class_inference);	// rmv later
-			$display("_________________________________________________________________________");
+			//$display("%d", class_inference);
         end
         else begin
             number_of_correct_inferences = number_of_correct_inferences;

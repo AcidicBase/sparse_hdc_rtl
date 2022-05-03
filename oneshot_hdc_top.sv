@@ -1,4 +1,4 @@
-`include "header.vh"              // comment out when synthesizing
+`include "header.vh"
 `include "oneshot_fsm.sv"
 `include "mapping_top.sv"
 `include "encoding_top.sv"
@@ -101,7 +101,6 @@ module oneshot_hdc_top(
         .testing_dataset_finished(testing_dataset_finished),
         .query_hv(query_hv),
         .binary_class_hvs(bin_class_hvs),
-		//.correct_class(class_select_bits),
         .correct_class(correct_class),
         .class_inference(class_inference),
         .number_of_correct_inferences(number_of_correct_inferences) 

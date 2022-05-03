@@ -27,8 +27,8 @@ module am_tree_comparator(
 		end
         else if(inferring_class) begin
             for (int i = 0; i < 13; i++ ) begin
-              tree_compare_0[i] = similarity_values[2*i] > similarity_values[(2*i)+1] ? similarity_values[2*i]:similarity_values[(2*i)+1];
-              winning_class_0[i] = similarity_values[2*i] > similarity_values[(2*i)+1] ? (2*i):((2*i)+1);
+              tree_compare_0[i] = similarity_values[2*i] >= similarity_values[(2*i)+1] ? similarity_values[2*i]:similarity_values[(2*i)+1];
+              winning_class_0[i] = similarity_values[2*i] >= similarity_values[(2*i)+1] ? (2*i):((2*i)+1);
             end
         end 
         else begin
@@ -41,22 +41,22 @@ module am_tree_comparator(
 
     // Level 1
     for (genvar i = 0; i < 6; i++ ) begin
-      assign tree_compare_1[i]  = tree_compare_0[2*i] > tree_compare_0[(2*i)+1] ? tree_compare_0[2*i]:tree_compare_0[(2*i)+1];
-      assign winning_class_1[i] = tree_compare_0[2*i] > tree_compare_0[(2*i)+1] ? winning_class_0[2*i]:winning_class_0[(2*i)+1];
+      assign tree_compare_1[i]  = tree_compare_0[2*i] >= tree_compare_0[(2*i)+1] ? tree_compare_0[2*i]:tree_compare_0[(2*i)+1];
+      assign winning_class_1[i] = tree_compare_0[2*i] >= tree_compare_0[(2*i)+1] ? winning_class_0[2*i]:winning_class_0[(2*i)+1];
     end
 
     // Level 2
     for (genvar i = 0; i < 3; i++ ) begin
-      assign tree_compare_2[i]  = tree_compare_1[2*i] > tree_compare_1[(2*i)+1] ? tree_compare_1[2*i]:tree_compare_1[(2*i)+1];
-      assign winning_class_2[i] = tree_compare_1[2*i] > tree_compare_1[(2*i)+1] ? winning_class_1[2*i]:winning_class_1[(2*i)+1];
+      assign tree_compare_2[i]  = tree_compare_1[2*i] >= tree_compare_1[(2*i)+1] ? tree_compare_1[2*i]:tree_compare_1[(2*i)+1];
+      assign winning_class_2[i] = tree_compare_1[2*i] >= tree_compare_1[(2*i)+1] ? winning_class_1[2*i]:winning_class_1[(2*i)+1];
     end
     
     // Level 3
-    assign tree_compare_3[0]  = tree_compare_2[0] > tree_compare_2[1] ? tree_compare_2[0]:tree_compare_2[1];
-    assign winning_class_3[0] = tree_compare_2[0] > tree_compare_2[1] ? winning_class_2[0]:winning_class_2[1];
+    assign tree_compare_3[0]  = tree_compare_2[0] >= tree_compare_2[1] ? tree_compare_2[0]:tree_compare_2[1];
+    assign winning_class_3[0] = tree_compare_2[0] >= tree_compare_2[1] ? winning_class_2[0]:winning_class_2[1];
     
-    assign tree_compare_3[1]  = tree_compare_2[2] > tree_compare_0[12] ? tree_compare_2[2]:tree_compare_0[12];     // for the outlier
-    assign winning_class_3[1] = tree_compare_2[2] > tree_compare_0[12] ? winning_class_2[2]:winning_class_0[12];
+    assign tree_compare_3[1]  = tree_compare_2[2] >= tree_compare_0[12] ? tree_compare_2[2]:tree_compare_0[12];     // for the outlier
+    assign winning_class_3[1] = tree_compare_2[2] >= tree_compare_0[12] ? winning_class_2[2]:winning_class_0[12];
     
     // Class inference
     always_comb begin //always_ff @(posedge clk or negedge nrst) begin
@@ -64,17 +64,7 @@ module am_tree_comparator(
             class_inference = 0;
         end
         else if(inferring_class) begin						
-            class_inference = tree_compare_3[0] > tree_compare_3[1] ? winning_class_3[0]:winning_class_3[1];
-
-/*
-			for(int i = 0; i < 26; i++) begin
-				$display("similarity_value(%g) = %d", i, similarity_values[i]);
-			end
-			
-			$display("tree_compare_3[0] = %d \t winning_class_3[0] = %d", tree_compare_3[0], winning_class_3[0]);
-			$display("tree_compare_3[1] = %d \t winning_class_3[1] = %d", tree_compare_3[1], winning_class_3[1]);
-			
-*/
+            class_inference = tree_compare_3[0] >= tree_compare_3[1] ? winning_class_3[0]:winning_class_3[1];
         end 
         else begin
             class_inference = class_inference;
