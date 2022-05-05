@@ -19,7 +19,7 @@ module am_and_array(
                         and_array_out[i] = binary_class_hvs[i][1] & query_hv_segment;
                     end
                 end
-                 4'd2: begin
+                4'd2: begin
                     for(int i = 0; i < 26; i++) begin
                         and_array_out[i] = binary_class_hvs[i][2] & query_hv_segment;
                     end

@@ -80,7 +80,7 @@ module bundler(
     assign accumulated_sum = tree_add_lvl_8 + tree_add_lvl_6[4]; 
       
     // update thresholded_bit  
-    assign thresholded_bit = (accumulated_sum > ENCODING_BIT_THR-1) ? 1'b1 : 1'b0;
+    assign thresholded_bit = (accumulated_sum > ENCODING_BIT_THR) ? 1'b1 : 1'b0;
   
                  
 endmodule  

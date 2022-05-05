@@ -33,7 +33,7 @@ module am_tree_comparator(
         end 
         else begin
             for (int i = 0; i < 13; i++ ) begin
-              tree_compare_0[i]  = 0;			// initially hold.
+              tree_compare_0[i]  = 0;
               winning_class_0[i] = 0;
             end
         end
@@ -55,11 +55,11 @@ module am_tree_comparator(
     assign tree_compare_3[0]  = tree_compare_2[0] >= tree_compare_2[1] ? tree_compare_2[0]:tree_compare_2[1];
     assign winning_class_3[0] = tree_compare_2[0] >= tree_compare_2[1] ? winning_class_2[0]:winning_class_2[1];
     
-    assign tree_compare_3[1]  = tree_compare_2[2] >= tree_compare_0[12] ? tree_compare_2[2]:tree_compare_0[12];     // for the outlier
+    assign tree_compare_3[1]  = tree_compare_2[2] >= tree_compare_0[12] ? tree_compare_2[2]:tree_compare_0[12];    // for the outlier
     assign winning_class_3[1] = tree_compare_2[2] >= tree_compare_0[12] ? winning_class_2[2]:winning_class_0[12];
     
     // Class inference
-    always_comb begin //always_ff @(posedge clk or negedge nrst) begin
+    always_comb begin
         if(!nrst) begin
             class_inference = 0;
         end

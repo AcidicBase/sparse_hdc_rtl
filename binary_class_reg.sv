@@ -9,7 +9,7 @@ module binary_class_reg(
     output logic [SEQ_CYCLE_COUNT-1:0][DIMS_PER_CC-1:0] bin_class_hvs [0:25]
     );    
   
-    // Note: output is equal to "logic [9:0][499:0] bin_class_hvs [0:25]" 
+    // Note: output logic [9:0][499:0] bin_class_hvs [0:25]
          
     // binary class hvs & input nonbinary class demux
     always_ff @(posedge clk or negedge nrst) begin

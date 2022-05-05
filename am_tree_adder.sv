@@ -7,7 +7,7 @@ module am_tree_adder(                                   // generate 26 of these
     output logic [12:0] similarity_value               // 13 bits to represent 5k-dim hvs
     );
     
-    // Tree adder 									   // add 500 bits
+    // Tree adder 									   // add 500 bits per cycle
     wire [1:0] tree_add_lvl_0[250];
     wire [2:0] tree_add_lvl_1[125];
     wire [3:0] tree_add_lvl_2[62];

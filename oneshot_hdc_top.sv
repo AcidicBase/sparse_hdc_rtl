@@ -37,7 +37,8 @@ module oneshot_hdc_top(
 
 	wire [HV_DIM-1:0] query_hv;
 	wire [4:0] correct_class;
-    
+
+   
     // main fsm  
     oneshot_fsm HDC_FSM1(
         .clk(clk),

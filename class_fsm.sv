@@ -95,10 +95,10 @@ module class_fsm(
         end      
         else if((state == S_BINARIZE) && en) begin 
             if (bin_ctr < SEQ_CYCLE_COUNT-1) begin
-                bin_ctr <= bin_ctr + 1;     // count from 0 to 9                                  
+                bin_ctr <= bin_ctr + 1;     					// count from 0 to 9                                  
             end 
             else begin
-                bin_ctr <= 0;               // reset counter to 0
+                bin_ctr <= 0;               					// reset counter to 0
             end
         end
         else begin
@@ -113,10 +113,10 @@ module class_fsm(
         end      
         else if(((state == S_TRAIN_NONBIN) || (state == S_BINARIZE)) && en) begin 
             if (class_hv_gen_ctr < SEQ_CYCLE_COUNT-1) begin
-                class_hv_gen_ctr <= class_hv_gen_ctr + 1;    // count from 0 to 9                                  
+                class_hv_gen_ctr <= class_hv_gen_ctr + 1;       // count from 0 to 9                                  
             end 
             else begin
-                class_hv_gen_ctr <= 0;                      // reset counter to 0
+                class_hv_gen_ctr <= 0;                          // reset counter to 0
             end
         end
         else begin
@@ -130,7 +130,7 @@ module class_fsm(
            binarized_class_counter <= 0;
         end      
         else if((state == S_BINARIZE) && en) begin
-            if (bin_ctr == SEQ_CYCLE_COUNT-1) begin              // if ctr == 9, increment
+            if (bin_ctr == SEQ_CYCLE_COUNT-1) begin            // increment if ctr == 9
                 binarized_class_counter <= binarized_class_counter + 1;
             end
             else begin 

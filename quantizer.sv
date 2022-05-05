@@ -10,10 +10,10 @@ module quantizer(
             quantized_value_level = 0;
         end 
         else if (en) begin      
-            if($signed(input_value) > 8889) begin
+            if($signed(input_value) > 8888) begin
                 quantized_value_level = 1;
             end          
-            else if($signed(input_value) > 6667) begin
+            else if($signed(input_value) > 6666) begin
                 quantized_value_level = 2;
             end 
             else if($signed(input_value) > 4444) begin
@@ -25,10 +25,10 @@ module quantizer(
             else if($signed(input_value) > 0) begin
                 quantized_value_level = 5;
             end 
-            else if($signed(input_value) > -2222) begin
+            else if($signed(input_value) > -2223) begin
                 quantized_value_level = 6;
             end
-            else if($signed(input_value) > -4444) begin
+            else if($signed(input_value) > -4445) begin
                 quantized_value_level = 7;
             end
             else if($signed(input_value) > -6667) begin

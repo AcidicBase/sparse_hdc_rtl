@@ -15,7 +15,7 @@ module class_thresholder(
         else begin
             if (binarizing_class_hvs && en) begin
                 for(int i = 0; i < DIMS_PER_CC; i++) begin
-                    thresholded_hv[i] = (nonbin_class_reg_out[i] >= CLASS_BIT_THR) ? 1'b1 : 1'b0;
+                    thresholded_hv[i] = (nonbin_class_reg_out[i] > CLASS_BIT_THR) ? 1'b1 : 1'b0;
                 end
             end
             else begin

@@ -13,6 +13,7 @@ module tb_oneshot_hdc_top();
     logic [4:0] class_select_bits;
     logic training_dataset_finished;
     logic testing_dataset_finished;
+
     wire [4:0] class_inference;
     wire [10:0] number_of_correct_inferences;
     wire oneshot_hdc_done;
@@ -57,9 +58,7 @@ module tb_oneshot_hdc_top();
         for(int i = 0; i < FEATURE_COUNT; i++) begin
             input_values[i] = 0;
         end
-    
-		// write inferences to a text file
-		fd = $fopen("oneshot_inferences.txt.", "w");
+   
 
         // store the letters of the isolet dataset
         $readmemb("train_Y.mem", class_select_bits_train);
@@ -120,6 +119,10 @@ module tb_oneshot_hdc_top();
 
 
         // TESTING_DATA_SET
+
+		// write inferences to a text file
+		fd = $fopen("oneshot_inferences.txt.", "w");
+
 		$readmemb("converted_samples_test/test_sample_0.mem", input_values);
 
         start_mapping = 1'b1;
@@ -177,7 +180,7 @@ module tb_oneshot_hdc_top();
 		$display("Total number of queries made: \t %d \n", TESTING_DATAPOINTS_COUNT);
 		$display("Accuracy: \t\t\t\t %f%", (number_of_correct_inferences/15.59));
 		
-     	$fclose(fd);	// lolz will it work?
+     	$fclose(fd);
 
         #(`CLK_PERIOD*5)
         $finish;
