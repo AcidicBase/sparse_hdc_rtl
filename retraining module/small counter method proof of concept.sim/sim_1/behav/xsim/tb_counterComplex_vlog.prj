@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../small counter method proof of concept.srcs/sources_1/new/counterComplex.sv" \
+"../../../../small counter method proof of concept.srcs/sources_1/new/counter_tally_reg.sv" \
+"../../../../small counter method proof of concept.srcs/sources_1/new/retraining_top.sv" \
+"../../../../small counter method proof of concept.srcs/sim_1/new/tb_counterComplex.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
