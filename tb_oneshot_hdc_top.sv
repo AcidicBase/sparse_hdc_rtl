@@ -1,5 +1,4 @@
 `timescale 1ps / 1ps
-//`include "header.vh"
 `include "oneshot_hdc_top.sv"
 `define CLK_PERIOD 10
 
@@ -24,7 +23,8 @@ module tb_oneshot_hdc_top();
     string training_sample;
     string testing_sample;
 
-	integer fd; // rmv later
+	// write inferences to a file
+	integer fd; 
 
     oneshot_hdc_top ONE_SHOT_TOP(
         .clk(clk),

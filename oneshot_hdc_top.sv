@@ -1,9 +1,9 @@
 `include "header.vh"
 `include "oneshot_fsm.sv"
-`include "mapping_top.sv"
+`include "quantizing_top.sv"
 `include "encoding_top.sv"
 `include "class_hv_gen_top.sv"
-`include "assoc_mem_top.sv"
+`include "am_top.sv"
 
 module oneshot_hdc_top(
     input wire clk,
@@ -89,11 +89,11 @@ module oneshot_hdc_top(
         .class_gen_done(class_gen_done)
     );
 
-	assign training_hv = (training_hdc_model) ? encoded_hv : 5000'b0;
+	assign training_hv                = (training_hdc_model) ? encoded_hv : 5000'b0;
 	assign training_class_select_bits = (training_hdc_model) ? class_select_bits : 5'b0;
    
     // associative memory
-    assoc_mem_top ASSOC_MEM1(
+    am_top ASSOC_MEM1(
         .clk(clk),
         .nrst(nrst),
         .en(en),
@@ -107,7 +107,7 @@ module oneshot_hdc_top(
         .number_of_correct_inferences(number_of_correct_inferences) 
     );
 
-	assign query_hv = (testing_hdc_model) ? encoded_hv : 5000'b0;
-    assign correct_class = (testing_hdc_model) ? class_select_bits : 5'b0;
+	assign query_hv                  = (testing_hdc_model) ? encoded_hv : 5000'b0;
+    assign correct_class             = (testing_hdc_model) ? class_select_bits : 5'b0;
 
 endmodule

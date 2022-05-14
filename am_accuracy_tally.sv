@@ -13,13 +13,13 @@ module am_accuracy_tally(
     
     always_ff @(posedge clk or negedge nrst) begin
         if (!nrst) begin
-            number_of_correct_inferences = 0;
+            number_of_correct_inferences <= 0;
         end
         else if(tallying_accuracy) begin
-            number_of_correct_inferences = number_of_correct_inferences + correct_inference;
+            number_of_correct_inferences <= number_of_correct_inferences + correct_inference;
         end
         else begin
-            number_of_correct_inferences = number_of_correct_inferences;
+            number_of_correct_inferences <= number_of_correct_inferences;
         end
     end
 

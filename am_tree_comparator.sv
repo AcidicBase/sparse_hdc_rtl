@@ -19,15 +19,9 @@ module am_tree_comparator(
 
     // Level 0 (Note: if !inferring_class, all levels will default to 0. No switching activity.)
     always_comb begin
-		if(!nrst) begin
-			  for (int i = 0; i < 13; i++ ) begin
-              	tree_compare_0[i] = 0;
-              	winning_class_0[i] = 0;
-            end
-		end
-        else if(inferring_class) begin
+		if(inferring_class) begin
             for (int i = 0; i < 13; i++ ) begin
-              tree_compare_0[i] = similarity_values[2*i] >= similarity_values[(2*i)+1] ? similarity_values[2*i]:similarity_values[(2*i)+1];
+              tree_compare_0[i]  = similarity_values[2*i] >= similarity_values[(2*i)+1] ? similarity_values[2*i]:similarity_values[(2*i)+1];
               winning_class_0[i] = similarity_values[2*i] >= similarity_values[(2*i)+1] ? (2*i):((2*i)+1);
             end
         end 
@@ -59,16 +53,17 @@ module am_tree_comparator(
     assign winning_class_3[1] = tree_compare_2[2] >= tree_compare_0[12] ? winning_class_2[2]:winning_class_0[12];
     
     // Class inference
-    always_comb begin
+    always_ff @(posedge clk or negedge nrst) begin
         if(!nrst) begin
-            class_inference = 0;
+            class_inference <= 0;
         end
         else if(inferring_class) begin						
-            class_inference = tree_compare_3[0] >= tree_compare_3[1] ? winning_class_3[0]:winning_class_3[1];
+            class_inference <= tree_compare_3[0] >= tree_compare_3[1] ? winning_class_3[0]:winning_class_3[1];
         end 
         else begin
-            class_inference = class_inference;
+            class_inference <= class_inference;
         end
     end
+
 
 endmodule

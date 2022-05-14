@@ -1,10 +1,10 @@
-# SimVision Command Script (Fri Apr 22 10:34:03  EDT EDT 2022)
+# SimVision Command Script (Tue May 03 09:57:35  EDT EDT 2022)
 #
 # Version 20.09.s012
 #
 # You can restore this configuration with:
 #
-#      xrun -64bit -access +r tb_oneshot_hdc_top.sv -input /home/jcaguicla/Documents/oneshot_apr16/oneshot.tcl
+#      xrun -64bit -access +r tb_oneshot_hdc_top.sv -input /home/jcaguicla/Documents/oneshot_hdc/oneshot.tcl
 #
 
 
@@ -216,7 +216,6 @@ preferences set toolbar-SimControl-WatchList {
   hide set_break
   position -row 0
 }
-preferences set key-bindings {PageUp PageUp Edit>Undo Ctrl+z View>Zoom>In Alt+i View>Zoom>Next {Alt+Right arrow} PageDown PageDown ScrollDown {Down arrow} Edit>Copy Ctrl+c Edit>Select>All Ctrl+a Simulation>NextInScope F7 View>Zoom>FullY_widget y Edit>Create>Group Ctrl+g Format>Radix>Decimal Ctrl+Shift+D Edit>Ungroup Ctrl+Shift+G TopOfPage Home Edit>Create>Condition Ctrl+e {command -console SimVision {%w sidebar access designbrowser selectall}} Alt+a ScrollLeft {Left arrow} Edit>SelectAllText Alt+a Edit>TextSearchConsole Alt+s View>Zoom>FullX_widget = Windows>SendTo>Waveform Ctrl+w Simulation>Return Shift+F5 View>CallstackDown {Ctrl+Down arrow} Select>All Ctrl+a Edit>Delete Del Format>Radix>Octal Ctrl+Shift+O Edit>Cut Ctrl+x Simulation>Run F2 Edit>Create>Marker Ctrl+m View>Center Alt+c View>CallstackInWindow Ctrl+k Edit>SelectAll Ctrl+a File>OpenDatabase Ctrl+o Edit>Redo Ctrl+y Format>Radix>Binary Ctrl+Shift+B View>ExpandSequenceTime>AtCursor Alt+x ScrollUp {Up arrow} File>CloseWindow Ctrl+Shift+w ScrollRight {Right arrow} View>Zoom>FullX Alt+= Edit>Create>Bus Ctrl+b Explore>NextEdge Ctrl+\] View>Zoom>Cursor-Baseline Alt+z View>Zoom>OutX Alt+o Edit>GoToLine Ctrl+g View>Zoom>Fit Alt+= View>Zoom>OutX_widget o View>CallstackUp {Ctrl+Up arrow} View>Bookmarks>Add Ctrl+b Format>Radix>Hexadecimal Ctrl+Shift+H Edit>Search Ctrl+f Simulation>Next F6 View>ShowValues Ctrl+s View>Zoom>InX Alt+i Edit>Create>MarkerAtCursor Ctrl+Shift+M View>Zoom>Out Alt+o Edit>TextSearch Ctrl+f Format>Signed Ctrl+Shift+S Edit>Paste Ctrl+v View>Zoom>Previous {Alt+Left arrow} View>CollapseSequenceTime>AtCursor Alt+s Format>Radix>ASCII Ctrl+Shift+A View>Zoom>InX_widget i BottomOfPage End Explore>PreviousEdge {Ctrl+[} Simulation>Step F5}
 
 #
 # Simulator
@@ -237,6 +236,7 @@ group set -comment {}
 group clear 0 end
 
 group insert \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.level_hvs[0:616]}]} ] \
     [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.clk}]} ] \
     [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.state[1:0]}]} ] \
     [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.start_mapping}]} ] \
@@ -260,19 +260,10 @@ group insert \
     [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.bundling_done}]} ] \
     [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.ctr[3:0]}]} ] \
     [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.shifted_hvs[0:616]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[9].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[8].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[7].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[6].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[5].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[4].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[3].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[2].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[1].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[0].DUT_BUNDLER.accumulated_sum[9:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.partial_encoded_hv[4999:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.encoded_hv[4999:0]}]} ] \
-    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.encoding_done}]} ]
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.mux_out[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.accumulated_sums[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.thresholded_bits[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.encoded_hv[4999:0]}]} ]
 group using {Class HV Gen}
 group set -overlay 0
 group set -comment {}
@@ -347,12 +338,12 @@ browser timecontrol set -lock 0
 #
 # Waveform windows
 #
-if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1920x953+-1+26}] != ""} {
-    window geometry "Waveform 1" 1920x953+-1+26
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1920x953+136+426}] != ""} {
+    window geometry "Waveform 1" 1920x953+136+426
 }
 window target "Waveform 1" on
 waveform using {Waveform 1}
-waveform sidebar visibility partial
+waveform sidebar select designbrowser
 waveform set \
     -primarycursor TimeA \
     -signalnames name \
@@ -435,68 +426,13 @@ set id [waveform add -cdivider divider]
 
 set groupId0 [waveform add -groups Quantizing]
 
-set id [waveform add -signals [subst  {
-	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.level_hvs[0:616]}]}
-	} ]]
 set id [waveform add -cdivider divider]
 
 set groupId0 [waveform add -groups Encoding]
-set gpGlist0 [waveform hierarchy contents $groupId0]
-set gpID0 [lindex $gpGlist0 0]
-foreach {name attrs} [subst  {
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.clk}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.start_encoding}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.state[1:0]}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.bundling_done}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.ctr[3:0]}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.shifted_hvs[0:616]}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[9].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[8].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[7].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[6].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[5].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[4].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[3].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[2].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[1].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.bundlers[0].DUT_BUNDLER.accumulated_sum[9:0]}]} {-radix %d}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.partial_encoded_hv[4999:0]}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.encoded_hv[4999:0]}]} {}
-    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.encoding_done}]} {}
-}] childcmds {
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-    {}
-} {
-    set expected [ join [waveform signals -format fullpath $gpID0] ]
-    if {[string equal $name $expected] || $name == "cdivider"} {
-        if {$attrs != ""} {
-            eval waveform format $gpID0 $attrs
-        }
-        if { $childcmds != ""} {
-            eval $childcmds
-        }
-    }
-    set gpGlist0 [lrange $gpGlist0 1 end]
-    set gpID0 [lindex $gpGlist0 0]
-}
 
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.encoding_done}]}
+	} ]]
 set id [waveform add -cdivider divider]
 
 set groupId0 [waveform add -groups {{Class HV Gen}}]
@@ -556,7 +492,6 @@ foreach {name attrs} [subst  {
     set gpGlist0 [lrange $gpGlist0 1 end]
     set gpID0 [lindex $gpGlist0 0]
 }
-waveform hierarchy collapse $groupId0
 
 set id [waveform add -cdivider divider]
 
@@ -609,7 +544,6 @@ foreach {name attrs} [subst  {
     set gpGlist0 [lrange $gpGlist0 1 end]
     set gpID0 [lindex $gpGlist0 0]
 }
-waveform hierarchy collapse $groupId0
 
 
 waveform xview limits 102ps 230ps
@@ -634,7 +568,7 @@ srcbrowser set \
     -showcallstack 0 \
     -displayvalues 0
 
-srcbrowser show -scope tb_oneshot_hdc_top -file /home/jcaguicla/Documents/oneshot_apr16/tb_oneshot_hdc_top.sv -line 7
+srcbrowser show -scope tb_oneshot_hdc_top -file /home/jcaguicla/Documents/oneshot_hdc/tb_oneshot_hdc_top.sv -line 7
 
 srcbrowser sidebar visibility partial
 

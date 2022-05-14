@@ -1,7 +1,7 @@
 `include "header_shift_vals.vh"
-`include "binder.sv"
-`include "bundler.sv"  
-`include "fsm_control.sv"
+`include "enc_binder.sv"
+`include "enc_bundler.sv"  
+`include "enc_fsm.sv"
   
 module encoding_top(
     input wire clk, 
@@ -24,7 +24,7 @@ module encoding_top(
 	
     
     //instantiate FSM
-    fsm_control FSM_CONTROL_0(
+    enc_fsm FSM_CONTROL_0(
         .clk(clk),
         .nrst(nrst),
         .en(en),
@@ -36,7 +36,7 @@ module encoding_top(
          
     //instantiate FEATURE_COUNT=617 binders 
     for (genvar i = 0; i < FEATURE_COUNT; i++) begin : binders
-        binder #(.SHIFT(SHIFTS[i]))
+        enc_binder #(.SHIFT(SHIFTS[i]))
         DUT_BINDER(
             .clk(clk),
             .nrst(nrst),
@@ -49,8 +49,7 @@ module encoding_top(
              
     // instantiate DIMS_PER_CC=500 bundlers   
     for (genvar j = 0; j < DIMS_PER_CC; j++) begin : bundlers
-       bundler DUT_BUNDLER(
-		   .nrst(nrst),
+       enc_bundler DUT_BUNDLER(
 		   .bundling_features(bundling_features),
            .bits_to_bundle(mux_out[j]), 
            .thresholded_bit(thresholded_bits[j])
