@@ -1,0 +1,586 @@
+# SimVision Command Script (Tue May 03 09:57:35  EDT EDT 2022)
+#
+# Version 20.09.s012
+#
+# You can restore this configuration with:
+#
+#      xrun -64bit -access +r tb_oneshot_hdc_top.sv -input /home/jcaguicla/Documents/oneshot_hdc/oneshot.tcl
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-CursorControl-SrcBrowser {
+  usual
+  hide usage
+  hide previous_edge
+  hide next_edge
+  shown 0
+  position -pos 1
+}
+preferences set txe-locate-add-fibers 1
+preferences set signal-type-colors {assertion #FF0000 output #FFA500 group #0099FF inout #00FFFF input #FFFF00 fiber #00EEEE errorsignal #FF0000 unknown #FFFFFF overlay #0099FF internal #00FF00 reference #FFFFFF}
+preferences set txe-view-hold 0
+preferences set txe-navigate-search-locate 0
+preferences set toolbar-CursorControl-WatchList {
+  usual
+  hide lock
+  hide usage
+  hide cursors
+  hide equal
+  hide time
+  hide units
+  hide previous_edge
+  hide next_edge
+  shown 0
+}
+preferences set toolbar-TimeSearch-SrcBrowser {
+  usual
+  shown 0
+  position -pos 3 -anchor e
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-Standard-WatchList {
+  usual
+  hide open
+  hide opensim
+  shown 0
+}
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-CursorControl-WaveWindow {
+  usual
+  hide usage
+  hide count_edges
+  position -row 1 -pos 1
+}
+preferences set verilog-colors {Su #ff0099 0 {} 1 {} HiZ #ff9900 We #00ffff Pu #9900ff Sm #00ff99 X #ff0000 StrX #ff0000 other #ffff00 Z #ff9900 Me #0000ff La #ff00ff St {}}
+preferences set txe-navigate-waveform-locate 1
+preferences set txe-view-hidden 0
+preferences set toolbar-TimeSearch-WaveWindow {
+  usual
+  position -pos 2
+}
+preferences set toolbar-Edit-WatchList {
+  usual
+  hide cut
+  hide delete
+  hide clear
+}
+preferences set toolbar-Standard-SrcBrowser {
+  usual
+  hide opensrc
+  hide opensim
+  hide copy
+  hide edit
+  position -pos 1
+}
+preferences set toolbar-SignalTrace-SrcBrowser {
+  usual
+  hide previous
+  hide next
+  hide history-prev
+  hide history-next
+  position -row 0 -pos 3 -anchor w
+}
+preferences set txe-search-show-linenumbers 1
+preferences set toolbar-NavSignalList-WaveWindow {
+  usual
+  position -row 0 -pos 2
+}
+preferences set toolbar-txe_waveform_toggle-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set toolbar-Windows-SrcBrowser {
+  usual
+  hide tools
+  position -pos 10
+}
+preferences set toolbar-Standard-WaveWindow {
+  usual
+  hide open
+  hide opensim
+  hide delete
+  hide search_toggle
+}
+preferences set plugin-enable-groupscope 0
+preferences set toolbar-SrcCallstack-SrcBrowser {
+  usual
+  hide callstackmove
+  position -row 0 -pos 5 -anchor w
+}
+preferences set key-bindings {Edit>Undo Ctrl+z PageUp PageUp View>Zoom>Next {Alt+Right arrow} View>Zoom>In Alt+i PageDown PageDown Edit>Copy Ctrl+c ScrollDown {Down arrow} Edit>Create>Group Ctrl+g View>Zoom>FullY_widget y Simulation>NextInScope F7 Edit>Select>All Ctrl+a Format>Radix>Decimal Ctrl+Shift+D Edit>Ungroup Ctrl+Shift+G TopOfPage Home Edit>Create>Condition Ctrl+e {command -console SimVision {%w sidebar access designbrowser selectall}} Alt+a ScrollLeft {Left arrow} Edit>SelectAllText Alt+a Edit>TextSearchConsole Alt+s View>Zoom>FullX_widget = Windows>SendTo>Waveform Ctrl+w Simulation>Return Shift+F5 View>CallstackDown {Ctrl+Down arrow} Select>All Ctrl+a Edit>Delete Del Format>Radix>Octal Ctrl+Shift+O Edit>Cut Ctrl+x Simulation>Run F2 Edit>Create>Marker Ctrl+m View>Center Alt+c View>CallstackInWindow Ctrl+k Edit>SelectAll Ctrl+a File>OpenDatabase Ctrl+o Edit>Redo Ctrl+y Format>Radix>Binary Ctrl+Shift+B View>ExpandSequenceTime>AtCursor Alt+x ScrollUp {Up arrow} File>CloseWindow Ctrl+Shift+w ScrollRight {Right arrow} View>Zoom>FullX Alt+= Edit>Create>Bus Ctrl+b Explore>NextEdge Ctrl+\] View>Zoom>Cursor-Baseline Alt+z View>Zoom>OutX Alt+o Edit>GoToLine Ctrl+g View>Zoom>Fit Alt+= View>Zoom>OutX_widget o View>CallstackUp {Ctrl+Up arrow} View>Bookmarks>Add Ctrl+b View>ShowValues Ctrl+s Simulation>Next F6 Edit>Search Ctrl+f Format>Radix>Hexadecimal Ctrl+Shift+H Edit>Create>MarkerAtCursor Ctrl+Shift+M View>Zoom>InX Alt+i View>Zoom>Out Alt+o Edit>TextSearch Ctrl+f View>Zoom>Previous {Alt+Left arrow} Edit>Paste Ctrl+v Format>Signed Ctrl+Shift+S View>CollapseSequenceTime>AtCursor Alt+s View>Zoom>InX_widget i Format>Radix>ASCII Ctrl+Shift+A Simulation>Step F5 Explore>PreviousEdge {Ctrl+[} BottomOfPage End}
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Windows-WaveWindow {
+  usual
+  hide tools
+  hide add
+  position -pos 10
+}
+preferences set txe-navigate-waveform-next-child 1
+preferences set toolbar-Windows-WatchList {
+  usual
+  hide tools
+  hide selectdeep
+  hide add
+  position -pos 10
+}
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  hide label
+  hide link
+  hide time_range
+  position -row 1 -pos 3
+}
+preferences set toolbar-TimeSearch-WatchList {
+  usual
+  shown 0
+  position -row 0 -pos 4
+}
+preferences set vhdl-colors {H #00ffff L #00ffff 0 {} X #ff0000 - {} 1 {} U #9900ff Z #ff9900 W #ff0000}
+preferences set txe-locate-scroll-x 1
+preferences set txe-locate-scroll-y 1
+preferences set txe-locate-pop-waveform 1
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+preferences set layout-default rtldesign
+preferences set toolbar-SimControl-SrcBrowser {
+  usual
+  show step_out
+  hide set_break
+  position -row 0 -pos 0
+}
+preferences set toolbar-SimControl-WaveWindow {
+  usual
+  hide step_in
+  hide step_over
+  hide step_adjacent
+  hide set_break
+  position -row 1 -pos 0
+}
+preferences set toolbar-txe_waveform_toggle-WaveWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Windows-Console {
+  usual
+  hide design_search
+  hide send_to
+  shown 1
+  position -pos 10 -anchor w
+}
+preferences set toolbar-SvDataBrowser-SrcBrowser {
+  usual
+  position -pos 3
+  name SvDataBrowser
+}
+preferences set toolbar-SignalTrace-SrcBrowser {
+  usual
+  hide previous
+  hide next
+  hide history-prev
+  hide history-next
+  position -row 0 -pos 2 -anchor w
+}
+preferences set toolbar-NavSignalList-WaveWindow {
+  usual
+  position -row 0 -pos 3
+}
+preferences set toolbar-Standard-Console {
+  usual
+  hide open
+  hide opensim
+  hide cut
+  hide delete
+}
+preferences set toolbar-SimControl-WatchList {
+  usual
+  hide step_in
+  hide step_over
+  hide step_adjacent
+  hide set_break
+  position -row 0
+}
+
+#
+# Simulator
+#
+database require simulator -hints {
+	simulator "xrun -64bit -gui -access +r tb_oneshot_hdc_top.sv -input oneshot.tcl"
+}
+#
+# Groups
+#
+catch {group new -name Quantizing -overlay 0}
+catch {group new -name Encoding -overlay 0}
+catch {group new -name {Class HV Gen} -overlay 0}
+catch {group new -name {Assoc Memory} -overlay 0}
+group using Quantizing
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.level_hvs[0:616]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.clk}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.state[1:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.start_mapping}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.mapping_hv_segment}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.hv_fetch_done}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.mapping_done}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.FSM_0.ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.input_values[0:616]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.mux_out[0:61]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.quantized_value_levels[0:61]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.im_fetch_outputs[0:61]}]} ]
+group using Encoding
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.clk}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.start_encoding}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.state[1:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.bundling_done}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.shifted_hvs[0:616]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.mux_out[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.accumulated_sums[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.thresholded_bits[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.encoded_hv[4999:0]}]} ]
+group using {Class HV Gen}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.clk}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.start_class_gen}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.adjusting_nonbin_class_hvs}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.nonbin_ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_hv_gen_ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.bin_ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.input_hv_chunk[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_in[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_out[499:0]}]} ] \
+    {### cdivider} \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.NONBIN_CLASS_1.nonbin_class_hvs[0:25]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.binarizing_class_hvs}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.binarized_class_counter[4:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.NONBIN_CLASS_1.class_select_bits[4:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_hv_gen_ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.bin_ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.bin_class_reg_in[499:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.binarizing_done}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.bin_class_hvs[0:25]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_gen_done}]} ]
+group using {Assoc Memory}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.clk}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.comparing_query_hv_with_class_hv}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.query_ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.tallying_accuracy}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.testing_dataset_finished}]} ] \
+    {### cdivider} \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.query_hv[4999:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.binary_class_hvs[0:25]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.query_ctr[3:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.and_array_out[0:25]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.similarity_values[0:25]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.start_querying}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.correct_class[4:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.inferring_class}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.class_inference[4:0]}]} ] \
+    [subst  {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.number_of_correct_inferences[10:0]}]} ]
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 765x346+136+54}] != ""} {
+    window geometry "Design Browser 1" 765x346+136+54
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set \
+    -signalsort name
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1920x953+136+426}] != ""} {
+    window geometry "Waveform 1" 1920x953+136+426
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar select designbrowser
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 229 \
+    -units ps \
+    -valuewidth 183
+waveform baseline set -time 5442ps
+
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.nrst}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.en}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.state[2:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.training_hdc_model}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.training_dataset_finished}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.class_gen_done}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.testing_hdc_model}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.testing_dataset_finished}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.oneshot_hdc_done}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.QUANTIZING1.input_values[0:616]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.class_select_bits[4:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.HDC_FSM1.state[2:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.start_mapping}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.level_hvs[0:616]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.mapping_done}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.encoded_hv[4999:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.encoding_done}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.bin_class_hvs[0:25]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.class_gen_done}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.class_inference[4:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.number_of_correct_inferences[10:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.oneshot_hdc_done}]}
+	} ]]
+set id [waveform add -cdivider divider]
+
+set groupId0 [waveform add -groups Quantizing]
+
+set id [waveform add -cdivider divider]
+
+set groupId0 [waveform add -groups Encoding]
+
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ENCODING1.FSM_CONTROL_0.encoding_done}]}
+	} ]]
+set id [waveform add -cdivider divider]
+
+set groupId0 [waveform add -groups {{Class HV Gen}}]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs} [subst  {
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.clk}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.start_class_gen}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.adjusting_nonbin_class_hvs}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.nonbin_ctr[3:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_hv_gen_ctr[3:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.bin_ctr[3:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.input_hv_chunk[499:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_in[499:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.nonbin_class_reg_out[499:0]}]} {}
+    cdivider {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.NONBIN_CLASS_1.nonbin_class_hvs[0:25]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.binarizing_class_hvs}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.binarized_class_counter[4:0]}]} {-radix %d}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.NONBIN_CLASS_1.class_select_bits[4:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_hv_gen_ctr[3:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.bin_ctr[3:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.bin_class_reg_in[499:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.binarizing_done}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.bin_class_hvs[0:25]}]} {-color #ffff00}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.CLASS_GEN1.C_FSM_1.class_gen_done}]} {}
+}] childcmds {
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+set id [waveform add -cdivider divider]
+
+set groupId0 [waveform add -groups {{Assoc Memory}}]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs} [subst  {
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.clk}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.comparing_query_hv_with_class_hv}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.query_ctr[3:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.tallying_accuracy}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.testing_dataset_finished}]} {}
+    cdivider {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.query_hv[4999:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.binary_class_hvs[0:25]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.query_ctr[3:0]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.and_array_out[0:25]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.similarity_values[0:25]}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.start_querying}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.correct_class[4:0]}]} {-radix %d}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.AM_FSM_1.inferring_class}]} {}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.class_inference[4:0]}]} {-radix %d}
+    {simulator::[format {tb_oneshot_hdc_top.ONE_SHOT_TOP.ASSOC_MEM1.number_of_correct_inferences[10:0]}]} {-radix %d}
+}] childcmds {
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+
+waveform xview limits 102ps 230ps
+
+#
+# Waveform Window Links
+#
+
+#
+# Source Browser windows
+#
+if {[catch {window new SrcBrowser -name "Source Browser 1" -geometry 907x346+909+54}] != ""} {
+    window geometry "Source Browser 1" 907x346+909+54
+}
+window target "Source Browser 1" on
+srcbrowser using {Source Browser 1}
+srcbrowser set \
+    -primarycursor TimeA \
+    -units ps \
+    -radix default \
+    -showstrength 0 \
+    -showcallstack 0 \
+    -displayvalues 0
+
+srcbrowser show -scope tb_oneshot_hdc_top -file /home/jcaguicla/Documents/oneshot_hdc/tb_oneshot_hdc_top.sv -line 7
+
+srcbrowser sidebar visibility partial
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 742x327+560+8
+
+#
+# Layout selection
+#
+window layout choose {RTL Design} -noexecute
+window layout reset
+
