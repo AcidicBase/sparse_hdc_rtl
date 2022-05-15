@@ -13,8 +13,8 @@ elaborate assoc_mem_top
 set_time_unit -nanoseconds
 create_clock -name {clk} -period 100.0 -waveform {0.0 50.0}
 #REMOVE set_input_delay set_output_delay set_driving_cell set_load_unit and set_load if we are synthesizing the whole thing at once. These are only needed if we synthesize by parts
-set_input_delay 300 -clock clk [all_inputs]
-set_output_delay 500 -clock clk [all_outputs]
+set_input_delay 30 -clock clk [all_inputs]
+set_output_delay 50 -clock clk [all_outputs]
 set_driving_cell -lib_cell C12T28SOI_LL_IVX4_P0 [all_inputs] 
 set_load_unit -femtofarads
 set_load 500 [all_outputs]
