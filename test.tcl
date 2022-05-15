@@ -11,7 +11,7 @@ read_hdl -sv { header.vh header_shift_vals.vh am_fsm.sv am_and_array.sv am_tree_
 elaborate assoc_mem_top
 #constraints
 set_time_unit -nanoseconds
-create_clock -name {clk} -period 1000.0 -waveform {0.0 500.0}
+create_clock -name {clk} -period 100.0 -waveform {0.0 50.0}
 #REMOVE set_input_delay set_output_delay set_driving_cell set_load_unit and set_load if we are synthesizing the whole thing at once. These are only needed if we synthesize by parts
 set_input_delay 300 -clock clk [all_inputs]
 set_output_delay 500 -clock clk [all_outputs]
