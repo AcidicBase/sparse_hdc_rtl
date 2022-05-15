@@ -6,7 +6,7 @@ set_db library C28SOI_SC_12_CORE_LL_tt28_1.00V_0.00V_0.00V_0.00V_25C.lib.gz
 #set_db lp_insert_discrete_clock_gating_logic true
 set_db hdl_track_filename_row_col true
 set_db lp_power_unit nW
-read_hdl -sv { header.vh header_shift_vals.vh assoc_mem_fsm.sv am_and_array.sv am_tree_adder.sv am_tree_comparator.sv am_accuracy_tally.sv class_bundler.sv class_thresholder.sv class_fsm.sv nonbinary_class_reg.sv binary_class_reg.sv binder.sv bundler.sv fsm_control.sv quantizer.sv im_fetch.sv map_fsm.sv assoc_mem_top.sv class_hv_gen_top.sv encoding_top.sv mapping_top.sv oneshot_fsm.sv oneshot_hdc_top.sv}
+read_hdl -sv { header.vh header_shift_vals.vh am_fsm.sv am_and_array.sv am_tree_adder.sv am_tree_comparator.sv am_accuracy_tally.sv class_bundler.sv class_thresholder.sv class_fsm.sv class_reg_nonbin.sv class_reg_bin.sv enc_binder.sv enc_bundler.sv enc_fsm.sv quantizer.sv qtz_im_fetch.sv qtz_fsm.sv am_top.sv class_hv_gen_top.sv encoding_top.sv quantizing_top.sv oneshot_fsm.sv oneshot_hdc_top.sv}
 #elaborate oneshot_hdc_top
 elaborate assoc_mem_top
 #constraints
