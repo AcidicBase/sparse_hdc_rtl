@@ -1,0 +1,8 @@
+xrun(64): 20.09-s012: (c) Copyright 1995-2021 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	20.09-s012: Started on May 17, 2022 at 08:27:19 EDT
+xrun
+	-64bit
+	-access +r
+	tb_oneshot_hdc_top.sv
+xrun: *E,FILEMIS: Cannot find the provided file tb_oneshot_hdc_top.sv.
+TOOL:	xrun(64)	20.09-s012: Exiting on May 17, 2022 at 08:27:19 EDT  (total: 00:00:00)
