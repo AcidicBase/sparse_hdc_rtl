@@ -29,7 +29,9 @@ module encoding_top_rework(
         .encoding_done							(encoding_done)
     );  
          
-    // FEATURE_COUNT=617 binders 
+    // FEATURE_COUNT=617 binders
+
+	/* old binder instantiation
     for (genvar i = 0; i < FEATURE_COUNT; i++) 
 		begin : binders
 			enc_binder #(.SHIFT(SHIFTS[i]))
@@ -41,7 +43,98 @@ module encoding_top_rework(
 			    .shifted_hv						(shifted_hvs[i])
 			);
     	end   
-
+	*/
+	
+	//New binder instantiation
+	enc_binder_pack_0 ENC_BINDER_PACK_0(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[0:61]),
+			    .shifted_hv						(shifted_hvs[0:61])
+			);
+			
+	enc_binder_pack_1 ENC_BINDER_PACK_1(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[62:123]),
+			    .shifted_hv						(shifted_hvs[62:123])
+			);
+			
+	enc_binder_pack_2 ENC_BINDER_PACK_2(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[124:185]),
+			    .shifted_hv						(shifted_hvs[124:185])
+			);
+	
+	enc_binder_pack_3 ENC_BINDER_PACK_3(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[186:247]),
+			    .shifted_hv						(shifted_hvs[186:247])
+			);
+	
+	enc_binder_pack_4 ENC_BINDER_PACK_4(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[248:309]),
+			    .shifted_hv						(shifted_hvs[248:309])
+			);
+	
+	enc_binder_pack_5 ENC_BINDER_PACK_5(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[310:371]),
+			    .shifted_hv						(shifted_hvs[310:371])
+			);	
+	enc_binder_pack_6 ENC_BINDER_PACK_6(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[372:433]),
+			    .shifted_hv						(shifted_hvs[372:433])
+			);
+			
+	enc_binder_pack_7 ENC_BINDER_PACK_7(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[434:495]),
+			    .shifted_hv						(shifted_hvs[434:495])
+			);
+			
+	enc_binder_pack_8 ENC_BINDER_PACK_8(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[496:557]),
+			    .shifted_hv						(shifted_hvs[496:557])
+			);
+			
+	enc_binder_pack_9 ENC_BINDER_PACK_9(
+				.clk							(clk),
+			    .nrst							(nrst),
+			    .start_binding					(start_encoding),
+				.en								(en),
+			    .level_hv						(level_hvs[558:616]),
+			    .shifted_hv						(shifted_hvs[558:616])
+			);
+	
 	// Nets (for bundler input assignment)
 	
 	//old Nets
