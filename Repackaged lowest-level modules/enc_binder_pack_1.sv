@@ -15,8 +15,8 @@ module enc_binder_pack_1(
 			    .clk							(clk),
 			    .nrst							(nrst),
 			    .start_binding					(start_encoding && en),
-			    .level_hv						(level_hvs[i]),
-			    .shifted_hv						(shifted_hvs[i])
+			    .level_hv						(level_hv[i]),
+			    .shifted_hv						(shifted_hv[i])
 			);
     	end
 		
