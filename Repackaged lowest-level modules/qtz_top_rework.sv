@@ -80,7 +80,7 @@ module quantizing_top(
 	);
 	
 	
-	//Smaller registers re-instantiated
+	//Smaller registers re-instantiated (blocks of (HV_DIM/5) = 1000 hv dims * 62 features/cc = 62k registers instantiated 5 times per class, so 130 times total)
 	
 	for (genvar k = 0; k < SEQ_CYCLE_COUNT-1; k++) 
 		begin : outReg
@@ -89,19 +89,82 @@ module quantizing_top(
 				.nrst								(nrst),
 				.mapping_hv_segment					(mapping_hv_segment),
 				.qtz_out_reg_en						(qtz_out_reg_en[k]),
-				.im_fetch_outputs					(im_fetch_outputs),
-				.level_hvs							(level_hvs[k:FEATURES_PER_CC*k])
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][0+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[k:FEATURES_PER_CC*k][0+:(HV_DIM/5)])
+			);
+			qtz_reg_out Q_REG_OUT_1(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[k]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM/5)+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[k:FEATURES_PER_CC*k][(HV_DIM/5)+:(HV_DIM/5)])
+			);
+			qtz_reg_out Q_REG_OUT_2(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[k]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM*(2/5))+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[k:FEATURES_PER_CC*k][(HV_DIM*(2/5))+:(HV_DIM/5)])
+			);
+			qtz_reg_out Q_REG_OUT_3(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[k]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM*(3/5))+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[k:FEATURES_PER_CC*k][(HV_DIM*(3/5))+:(HV_DIM/5)])
+			);
+			qtz_reg_out Q_REG_OUT_4(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[k]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM*(4/5))+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[k:FEATURES_PER_CC*k][(HV_DIM*(4/5))+:(HV_DIM/5)])
 			);
 		end
 	
 	//10th CC register
-	qtz_reg_out_10 Q_REG_OUT_10(
+	qtz_reg_out_10 Q_REG_OUT_10th_0(
 				.clk								(clk),
 				.nrst								(nrst),
 				.mapping_hv_segment					(mapping_hv_segment),
 				.qtz_out_reg_en						(qtz_out_reg_en[9]),
-				.im_fetch_outputs					(im_fetch_outputs),
-				.level_hvs							(level_hvs[558:616])
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][0+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[558:616][0+:(HV_DIM/5)])
 			);
-	
+	qtz_reg_out_10 Q_REG_OUT_10th_1(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[9]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM/5)+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[558:616][(HV_DIM/5)+:(HV_DIM/5)])
+			);
+	qtz_reg_out_10 Q_REG_OUT_10th_2(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[9]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM*(2/5))+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[558:616][(HV_DIM*(2/5))+:(HV_DIM/5)])
+			);
+	qtz_reg_out_10 Q_REG_OUT_10th_3(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[9]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM*(3/5))+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[558:616][(HV_DIM*(3/5))+:(HV_DIM/5)])
+			);
+	qtz_reg_out_10 Q_REG_OUT_10th_4(
+				.clk								(clk),
+				.nrst								(nrst),
+				.mapping_hv_segment					(mapping_hv_segment),
+				.qtz_out_reg_en						(qtz_out_reg_en[9]),
+				.im_fetch_outputs					(im_fetch_outputs[0:FEATURES_PER_CC-1][(HV_DIM*(4/5))+:(HV_DIM/5)]),
+				.level_hvs							(level_hvs[558:616][(HV_DIM*(4/5))+:(HV_DIM/5)])
+			);
 endmodule
