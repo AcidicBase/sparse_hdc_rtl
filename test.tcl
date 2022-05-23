@@ -6,7 +6,7 @@ set_db library C28SOI_SC_12_CORE_LL_tt28_1.00V_0.00V_0.00V_0.00V_25C.lib.gz
 #set_db lp_insert_discrete_clock_gating_logic true
 set_db hdl_track_filename_row_col true
 set_db lp_power_unit nW
-read_hdl -sv { header.vh header_shift_vals.vh am_fsm.sv am_and_array.sv am_tree_adder.sv am_tree_comparator.sv class_bundler.sv class_thresholder.sv class_fsm.sv class_reg_nonbin.sv class_reg_bin.sv class_mux_in.sv class_mux_out.sv class_select.sv enc_reg_out.sv enc_nets.sv enc_mux_in.sv enc_binder.sv enc_bundler.sv enc_fsm.sv qtz_reg_out.sv qtz_im.sv quantizer.sv qtz_im_fetch.sv qtz_mux_in.sv qtz_fsm.sv am_top.sv class_hv_gen_top.sv encoding_top.sv quantizing_top.sv oneshot_fsm.sv oneshot_hdc_top.sv}
+read_hdl -sv { header.vh header_shift_vals.vh am_fsm.sv am_and_array.sv am_tree_adder.sv am_tree_comparator.sv class_bundler.sv class_thresholder.sv class_fsm.sv class_reg_nonbin.sv class_reg_bin.sv class_mux_in.sv enc_reg_out.sv enc_nets.sv enc_mux_in.sv enc_binder.sv enc_bundler.sv enc_fsm.sv qtz_reg_out.sv qtz_im.sv quantizer.sv qtz_im_fetch.sv qtz_mux_in.sv qtz_fsm.sv am_top.sv class_hv_gen_top.sv encoding_top.sv quantizing_top.sv oneshot_fsm.sv oneshot_hdc_top.sv}
 #elaborate oneshot_hdc_top
 elaborate assoc_mem_top
 #constraints
