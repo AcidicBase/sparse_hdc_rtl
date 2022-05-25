@@ -2,8 +2,8 @@ module class_reg_nonbin(
     input  wire  											clk,
     input  wire  											nrst,
     input  wire  											adjusting_nonbin_class_hvs,
-	input  wire  [3:0] 										class_ctr, 
-    input  wire  [3:0] 										nonbin_ctr,    
+	input  wire	 [3:0]										nonbin_ctr,
+	input  wire  [3:0] 										class_ctr,   
     input  wire  [DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] 	nonbin_class_reg_in,
     output logic [DIMS_PER_CC-1:0][BITWIDTH_PER_DIM-1:0] 	nonbin_class_reg_out
     );  
