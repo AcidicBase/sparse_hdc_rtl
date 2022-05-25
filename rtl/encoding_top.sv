@@ -10,6 +10,7 @@ module encoding_top(
     
 	wire 						 	bundling_features;
     wire 	[3:0] 				 	ctr;
+	wire 	[HV_DIM-1:0] 		 	shifted_hvs_to_dff		[0:FEATURE_COUNT-1];
     wire 	[HV_DIM-1:0] 		 	shifted_hvs 			[0:FEATURE_COUNT-1];
     wire 	[FEATURE_COUNT-1:0] 	bits_to_bundle_arr		[HV_DIM-1:0];
     
@@ -31,85 +32,67 @@ module encoding_top(
          
     // FEATURE_COUNT=617 binders (packed into groups of 62 binders)
 	enc_binder_pack_0 ENC_BINDER_PACK_0(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[0:61]),
-	    .shifted_hv								(shifted_hvs[0:61])
+	    .shifted_hv								(shifted_hvs_to_dff[0:61])
 
 	);
 
 	enc_binder_pack_1 ENC_BINDER_PACK_1(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[62:123]),
-	    .shifted_hv								(shifted_hvs[62:123])
+	    .shifted_hv								(shifted_hvs_to_dff[62:123])
 	);
 			
 	enc_binder_pack_2 ENC_BINDER_PACK_2(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[124:185]),
-	    .shifted_hv								(shifted_hvs[124:185])
+	    .shifted_hv								(shifted_hvs_to_dff[124:185])
 	);
 	
 	enc_binder_pack_3 ENC_BINDER_PACK_3(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[186:247]),
-	    .shifted_hv								(shifted_hvs[186:247])
+	    .shifted_hv								(shifted_hvs_to_dff[186:247])
 	);
 	
 	enc_binder_pack_4 ENC_BINDER_PACK_4(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[248:309]),
-	    .shifted_hv								(shifted_hvs[248:309])
+	    .shifted_hv								(shifted_hvs_to_dff[248:309])
 	);
 	
 	enc_binder_pack_5 ENC_BINDER_PACK_5(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[310:371]),
-	    .shifted_hv								(shifted_hvs[310:371])
+	    .shifted_hv								(shifted_hvs_to_dff[310:371])
 	);	
 
 	enc_binder_pack_6 ENC_BINDER_PACK_6(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[372:433]),
-	    .shifted_hv								(shifted_hvs[372:433])
+	    .shifted_hv								(shifted_hvs_to_dff[372:433])
 	);
 			
 	enc_binder_pack_7 ENC_BINDER_PACK_7(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[434:495]),
-	    .shifted_hv								(shifted_hvs[434:495])
+	    .shifted_hv								(shifted_hvs_to_dff[434:495])
 	);
 			
 	enc_binder_pack_8 ENC_BINDER_PACK_8(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[496:557]),
-	    .shifted_hv								(shifted_hvs[496:557])
+	    .shifted_hv								(shifted_hvs_to_dff[496:557])
 	);
 			
 	enc_binder_pack_9 ENC_BINDER_PACK_9(
-		.clk									(clk),
-	    .nrst									(nrst),
-	    .start_encoding							(start_encoding),
 	    .level_hv								(level_hvs[558:616]),
-	    .shifted_hv								(shifted_hvs[558:616])
+	    .shifted_hv								(shifted_hvs_to_dff[558:616])
 	);
+
+	// Shifted HV Registers
+	for (genvar i = 0; i < FEATURE_COUNT; i++) 
+		begin: enc_shift_regs
+			enc_shift_reg ENC_SHIFT_REG (
+				.clk							(clk),
+				.nrst							(nrst),
+				.start_encoding					(start_encoding),
+				.shifted_hv_to_store			(shifted_hvs_to_dff[i]),
+				.shifted_hv_reg_out				(shifted_hvs[i])
+			);
+		end
 
 
 	// Nets (this just packs the dimensions of shifted_hvs)
